@@ -13,6 +13,7 @@
 public class Account {
     String user;
     String pass;
+    String role;
     
     public Account(){
     }
@@ -20,8 +21,18 @@ public class Account {
     public Account(String user, String pass) {
         this.user = user;
         this.pass = pass;
+        this.role = role;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+    
+    
     public String getUser() {
         return user;
     }
