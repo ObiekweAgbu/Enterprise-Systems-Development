@@ -53,7 +53,8 @@ public class LoginData {
             }
         }
         catch (Exception e){
+            
         }
-        return null;
+        return "!";
     }
 }

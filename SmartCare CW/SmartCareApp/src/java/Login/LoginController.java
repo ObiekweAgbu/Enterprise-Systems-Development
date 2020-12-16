@@ -63,10 +63,9 @@ public class LoginController extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("Doctor_DB.jsp");
                 rd.forward(request, response);
             }
-            else{
+            else if (temp.equals("!")){
                 response.sendRedirect("Login.jsp");
                 log(temp);
-     
             }
             
         } catch (Exception e) {
