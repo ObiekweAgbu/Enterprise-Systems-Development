@@ -12,6 +12,8 @@
         <title>JSP Page</title>
     </head>
     <body>
+        Welcome
+        <%=request.getParameter("UserID")%>
         <h1>Nurse Dashboard</h1>
     </body>
 </html>

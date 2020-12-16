@@ -9,11 +9,13 @@ package Login;
 
 import Login.LoginData;
 import java.io.IOException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.http.HttpRequest;
 
 /**
  *
@@ -38,23 +40,28 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
+      
             String user = request.getParameter("UserID");
             String pass = request.getParameter("Password");
             LoginData d = new LoginData();
             String temp = d.checkLog(user, pass);
             
             if(temp.equals("admin")){
-                response.sendRedirect("admin.jsp");
-                log(temp);
+                RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
+                rd.forward(request, response);
             }
             else if(temp.equals("client")){
-                response.sendRedirect("client_DB.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("client_DB.jsp");
+                rd.forward(request, response);
+                
             }
             else if(temp.equals("nurse")){
-                response.sendRedirect("Nurse_DB.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("Nurse_DB.jsp");
+                rd.forward(request, response);
             }
             else if(temp.equals("doctor")){
-                response.sendRedirect("Doctor_DB.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("Doctor_DB.jsp");
+                rd.forward(request, response);
             }
             else{
                 response.sendRedirect("Login.jsp");
