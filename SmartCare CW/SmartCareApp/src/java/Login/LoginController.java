@@ -1,3 +1,5 @@
+package Login;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -5,6 +7,7 @@
  */
 
 
+import Login.LoginData;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,16 +41,24 @@ public class LoginController extends HttpServlet {
             String user = request.getParameter("UserID");
             String pass = request.getParameter("Password");
             LoginData d = new LoginData();
-            boolean temp = d.checkLog(user, pass);
+            String temp = d.checkLog(user, pass);
             
-            if(temp){
-                response.sendRedirect("Suc.jsp");
-          
+            if(temp.equals("admin")){
+                response.sendRedirect("admin.jsp");
+                log(temp);
+            }
+            else if(temp.equals("client")){
+                response.sendRedirect("client_DB.jsp");
+            }
+            else if(temp.equals("nurse")){
+                response.sendRedirect("Nurse_DB.jsp");
+            }
+            else if(temp.equals("doctor")){
+                response.sendRedirect("Doctor_DB.jsp");
             }
             else{
                 response.sendRedirect("Login.jsp");
-                log(user);
-                log(pass);
+                log(temp);
      
             }
             

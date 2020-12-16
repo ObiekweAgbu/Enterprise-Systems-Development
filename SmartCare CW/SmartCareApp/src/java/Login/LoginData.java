@@ -1,3 +1,5 @@
+package Login;
+
 
 
 
@@ -6,6 +8,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -18,11 +22,10 @@ import java.sql.Statement;
  * @author Lil Shil
  */
 public class LoginData {
-
     public LoginData() {
     }
     
-    public boolean checkLog(String user, String pass){
+    public String checkLog(String user, String pass){
         String driverName = "com.mysql.jdbc.Driver";
         String connectionUrl = "jdbc:mysql://localhost:3306/";
         String dbName = "demo";
@@ -46,13 +49,11 @@ public class LoginData {
             rs = ms.executeQuery(q);
             while(rs.next()){
                 System.out.print("Success");
-                return true;
+                return rs.getString("job");
             }
         }
         catch (Exception e){
         }
-        
-        
-        return false;
+        return null;
     }
 }
