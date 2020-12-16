@@ -1,5 +1,3 @@
-package com;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -7,16 +5,12 @@ package com;
  */
 
 
-import model.LoginData;
 import java.io.IOException;
-import java.sql.Connection;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import model.Jdbc;
 
 /**
  *
@@ -39,15 +33,27 @@ public class LoginController extends HttpServlet {
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String qry = "select * from users";
-       
-        HttpSession session = request.getSession();
-        
         response.setContentType("text/html;charset=UTF-8");
-        
-        Jdbc dbBean = new Jdbc();
-        dbBean.connect((Connection)request.getServletContext().getAttribute("connection"));
-        session.setAttribute("dbbean", dbBean);
+        try {
+            String user = request.getParameter("UserID");
+            String pass = request.getParameter("Password");
+            LoginData d = new LoginData();
+            boolean temp = d.checkLog(user, pass);
+            
+            if(temp){
+                response.sendRedirect("Suc.jsp");
+          
+            }
+            else{
+                response.sendRedirect("Login.jsp");
+                log(user);
+                log(pass);
+     
+            }
+            
+        } catch (Exception e) {
+        }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
