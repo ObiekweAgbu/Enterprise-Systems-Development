@@ -1,3 +1,5 @@
+package Login;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -5,12 +7,15 @@
  */
 
 
+import Login.LoginData;
 import java.io.IOException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.http.HttpRequest;
 
 /**
  *
@@ -35,20 +40,32 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
+      
             String user = request.getParameter("UserID");
             String pass = request.getParameter("Password");
             LoginData d = new LoginData();
-            boolean temp = d.checkLog(user, pass);
+            String temp = d.checkLog(user, pass);
             
-            if(temp){
-                response.sendRedirect("Suc.jsp");
-          
+            if(temp.equals("admin")){
+                RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
+                rd.forward(request, response);
             }
-            else{
+            else if(temp.equals("client")){
+                RequestDispatcher rd = request.getRequestDispatcher("client_DB.jsp");
+                rd.forward(request, response);
+                
+            }
+            else if(temp.equals("nurse")){
+                RequestDispatcher rd = request.getRequestDispatcher("Nurse_DB.jsp");
+                rd.forward(request, response);
+            }
+            else if(temp.equals("doctor")){
+                RequestDispatcher rd = request.getRequestDispatcher("Doctor_DB.jsp");
+                rd.forward(request, response);
+            }
+            else if (temp.equals("!")){
                 response.sendRedirect("Login.jsp");
-                log(user);
-                log(pass);
-     
+                log(temp);
             }
             
         } catch (Exception e) {
