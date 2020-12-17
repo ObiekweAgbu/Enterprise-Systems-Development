@@ -2,4 +2,4 @@
 ![alt text](https://github.com/ObiekweAgbu/Enterprise-Systems-Development/blob/main/SmartCare%20CW/burndownchart-sprint1.png)
 
 ## Burndown Chart - Sprint 2
-![alt text](https://github.com/ObiekweAgbu/Enterprise-Systems-Development/blob/main/SmartCare%20CW/Bundownchart-sprint2.png)
+![alt text](https://github.com/ObiekweAgbu/Enterprise-Systems-Development/blob/main/SmartCare%20CW/updated%20image%20burndown%20chart%20sprint%202.png)
