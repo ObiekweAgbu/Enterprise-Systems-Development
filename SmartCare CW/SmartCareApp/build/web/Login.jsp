@@ -15,7 +15,8 @@
         <h1>Login form</h1>
         <form action="LoginController" method = "post">
             Username: <input type="text" name="UserID"/><br>
-            Password: <input type="text" name="Password"/><br>
+            Password: <input type="password" name="Password"/><br>
+
             <input type="submit" value="Login" />
         </form>
     </body>
