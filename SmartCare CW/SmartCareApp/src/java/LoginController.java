@@ -1,4 +1,4 @@
-package Login;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -7,7 +7,7 @@ package Login;
  */
 
 
-import Login.LoginData;
+
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
