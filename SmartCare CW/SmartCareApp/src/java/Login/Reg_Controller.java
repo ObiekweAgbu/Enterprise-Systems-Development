@@ -1,28 +1,24 @@
-
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
+package Login;
 
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.springframework.http.HttpRequest;
 
 /**
  *
  * @author Lil Shil
  */
-@WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
-public class LoginController extends HttpServlet {
+@WebServlet(name = "Reg_Controller", urlPatterns = {"/Reg_Controller"})
+public class Reg_Controller extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,43 +29,9 @@ public class LoginController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
-    
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try {
-      
-            String user = request.getParameter("UserID");
-            String pass = request.getParameter("Password");
-            LoginData d = new LoginData();
-            String temp = d.checkLog(user, pass);
-            
-            if(temp.equals("admin")){
-                RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
-                rd.forward(request, response);
-            }
-            else if(temp.equals("client")){
-                RequestDispatcher rd = request.getRequestDispatcher("client_DB.jsp");
-                rd.forward(request, response);
-                
-            }
-            else if(temp.equals("nurse")){
-                RequestDispatcher rd = request.getRequestDispatcher("Nurse_DB.jsp");
-                rd.forward(request, response);
-            }
-            else if(temp.equals("doctor")){
-                RequestDispatcher rd = request.getRequestDispatcher("Doctor_DB.jsp");
-                rd.forward(request, response);
-            }
-            else if (temp.equals("!")){
-                response.sendRedirect("Login.jsp");
-                log(temp);
-            }
-            
-        } catch (Exception e) {
-        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
