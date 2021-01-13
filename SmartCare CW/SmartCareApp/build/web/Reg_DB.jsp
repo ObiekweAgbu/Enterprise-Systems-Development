@@ -12,6 +12,16 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <form action="Reg_Controller" method="GET">
+            Username: <input type="text" name="Uname" value="" /><br>
+            Password: <input type="password" name="PW" value="" /><br>
+            Name: <input type="text" name="Name" value="" /><br>
+            Address: <input type="text" name="Address" value="" /><br>
+            Type: <select name="Type">
+                <option>NHS</option>
+                <option>Private</option>
+            </select><br>
+            <input type="submit" value="Register" />
+        </form>
     </body>
 </html>
