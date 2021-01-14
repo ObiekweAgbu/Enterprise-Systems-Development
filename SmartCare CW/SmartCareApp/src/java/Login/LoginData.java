@@ -110,4 +110,31 @@ public class LoginData {
         System.out.println("Added client");
         
     }
+    
+    public void Add_Doc_or_Nurse(String eName, String eAddress, String uName, String ePass, String Role) throws SQLException{
+        try {
+        Class.forName(driverName);
+        } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+        }
+        
+        Connection con = null;
+        Statement ms = null;
+        ResultSet rs = null;
+        String q1 = "INSERT INTO `demo`.`users` (`uname`, `passwd`, `job`) VALUES (";
+        String q2 = "'"+ uName+"', '"+ePass+"', '"+Role+"')";
+        
+        String q3 = "INSERT INTO `demo`.`employee` (`eName`, `eAddress`, `uName`) VALUES ('";
+        String q4 = eName + "', '" + eAddress + "', '" + uName + "')";
+        String InsertToUser = q1+q2;
+        String InsertToEmployee = q3+q4;
+        
+        con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+        ms = con.createStatement();
+        ms.executeUpdate(InsertToUser);
+        ms.executeUpdate(InsertToEmployee);
+        
+        System.out.println("Added Doctor or Nurse");
+        
+    }
 }

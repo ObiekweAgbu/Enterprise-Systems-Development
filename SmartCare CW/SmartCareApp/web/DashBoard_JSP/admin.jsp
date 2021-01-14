@@ -18,6 +18,9 @@
         <form action="View_Patient_Servlet" method="POST">
             <input type="submit" value="View Patient Information" />
         </form>
+        <form action="Adding_Employee_Servlet">
+            <input type="submit" value="Adding new Dotor or Nurse" />
+        </form>
     </body>
     
 </html>

@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Lil Shil
  */
-@WebFilter(urlPatterns = {"/View_Patient_Servlet"})
+@WebFilter(urlPatterns = {"/View_Patient_Servlet", "/Adding_Employee_Servlet"})
 public class Session_Filter implements Filter {
 
     @Override
