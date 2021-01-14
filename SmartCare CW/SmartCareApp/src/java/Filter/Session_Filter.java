@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Lil Shil
  */
-@WebFilter(urlPatterns = {""})
+@WebFilter(urlPatterns = {"/View_Patient_Servlet"})
 public class Session_Filter implements Filter {
 
     @Override
@@ -39,8 +39,6 @@ public class Session_Filter implements Filter {
             rps.sendRedirect("Login.jsp");
         }
         else{
-            RequestDispatcher rd = rq.getRequestDispatcher("admin.jsp");
-            rd.forward(request, response);
             System.out.println("Session is still up");
         }
         chain.doFilter(request, response);

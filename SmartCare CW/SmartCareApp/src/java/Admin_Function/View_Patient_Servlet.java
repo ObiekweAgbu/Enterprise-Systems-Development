@@ -1,31 +1,25 @@
-package Login;
-
-
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
+package Admin_Function;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import org.springframework.http.HttpRequest;
 
 /**
  *
  * @author Lil Shil
  */
-@WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
-public class LoginController extends HttpServlet {
+@WebServlet(name = "View_Patient_Servlet", urlPatterns = {"/View_Patient_Servlet"})
+public class View_Patient_Servlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,47 +30,10 @@ public class LoginController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
-    
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try {
-      
-            String user = request.getParameter("UserID");
-            String pass = request.getParameter("Password");
-            LoginData d = new LoginData();
-            String temp = d.checkLog(user, pass);
-            
-            if(temp.equals("admin")){
-                HttpSession session = request.getSession();
-                RequestDispatcher rd = request.getRequestDispatcher("DashBoard_JSP/admin.jsp");
-                rd.forward(request, response);
-            }
-            else if(temp.equals("client")){
-                HttpSession session = request.getSession();
-                RequestDispatcher rd = request.getRequestDispatcher("DashBoard_JSP/client_DB.jsp");
-                rd.forward(request, response);
-                
-            }
-            else if(temp.equals("nurse")){
-                HttpSession session = request.getSession();
-                RequestDispatcher rd = request.getRequestDispatcher("DashBoard_JSP/Nurse_DB.jsp");
-                rd.forward(request, response);
-            }
-            else if(temp.equals("doctor")){
-                HttpSession session = request.getSession();
-                RequestDispatcher rd = request.getRequestDispatcher("DashBoard_JSP/Doctor_DB.jsp");
-                rd.forward(request, response);
-            }
-            else if (temp.equals("!")){
-                response.sendRedirect("Login.jsp");
-                log(temp);
-            }
-            
-        } catch (Exception e) {
-        }
+        RequestDispatcher rd = request.getRequestDispatcher("Admin_JSP/View_Patient.jsp");
+        rd.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

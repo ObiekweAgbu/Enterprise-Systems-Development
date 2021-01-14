@@ -13,6 +13,10 @@
         <servlet-name>Reg_Controller</servlet-name>
         <servlet-class>Login.Reg_Controller</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>View_Patient_Servlet</servlet-name>
+        <servlet-class>Admin_Function.View_Patient_Servlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.htm</url-pattern>
@@ -20,6 +24,10 @@
     <servlet-mapping>
         <servlet-name>Reg_Controller</servlet-name>
         <url-pattern>/Reg_Controller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>View_Patient_Servlet</servlet-name>
+        <url-pattern>/View_Patient_Servlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

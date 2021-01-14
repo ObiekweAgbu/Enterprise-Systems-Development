@@ -15,5 +15,9 @@
         Welcome
         <%=request.getParameter("UserID")%>
         <h1>admin Dashboard</h1>
+        <form action="View_Patient_Servlet" method="POST">
+            <input type="submit" value="View Patient Information" />
+        </form>
     </body>
+    
 </html>
