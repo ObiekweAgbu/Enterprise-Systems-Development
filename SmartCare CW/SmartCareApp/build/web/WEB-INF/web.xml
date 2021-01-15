@@ -21,6 +21,10 @@
         <servlet-name>Adding_Employee_Servlet</servlet-name>
         <servlet-class>Admin_Function.Adding_Employee_Servlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Processing_Request_Serv</servlet-name>
+        <servlet-class>Admin_Function.Processing_Request_Serv</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.htm</url-pattern>
@@ -36,6 +40,10 @@
     <servlet-mapping>
         <servlet-name>Adding_Employee_Servlet</servlet-name>
         <url-pattern>/Adding_Employee_Servlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Processing_Request_Serv</servlet-name>
+        <url-pattern>/Processing_Request_Serv</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

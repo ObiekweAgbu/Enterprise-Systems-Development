@@ -12,11 +12,13 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form action="Reg_Controller" method="GET">
+        <form action="/Reg_Controller" method="GET">
             Username: <input type="text" name="Uname" value="" /><br>
             Password: <input type="password" name="PW" value="" /><br>
             Name: <input type="text" name="Name" value="" /><br>
+            Date of Birth: <input type="text" name="DOB" value="" /><br>
             Address: <input type="text" name="Address" value="" /><br>
+            Post Code: <input type="text" name="PO" value="" /><br>
             Type: <select name="Type">
                 <option>NHS</option>
                 <option>Private</option>

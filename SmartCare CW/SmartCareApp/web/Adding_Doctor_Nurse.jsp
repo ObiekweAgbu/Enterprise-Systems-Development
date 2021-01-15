@@ -14,7 +14,9 @@
     <body>
         <form action="Adding_Employee_Servlet" method="POST">
             Name: <input type="text" name="eName" value="" /><br>
+            Date of Birth: <input type="text" name="eDOB" value="" /><br>
             Address: <input type="text" name="eAddress" value="" /><br>
+            Post Code: <input type="text" name="ePO" value="" /><br>
             Username:   <input type="text" name="uName" value="" /><br>
             Initial Password: <input type="text" name="ePass" value="" /><br>
             Role: <select name="Role">

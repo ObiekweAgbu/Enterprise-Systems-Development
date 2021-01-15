@@ -36,14 +36,16 @@ public class Reg_Controller extends HttpServlet {
             throws ServletException, IOException, SQLException {
         String uname = request.getParameter("Uname");
         String pass = request.getParameter("PW");
+        String DOB = request.getParameter("DOB");
         String name = request.getParameter("Name");
         String address = request.getParameter("Address");
+        String PO = request.getParameter("PO");
         String type = request.getParameter("Type");
         
         LoginData LD = new LoginData();
         boolean NotExist = LD.check_Reg(uname);
         if(NotExist){
-            LD.Add_Patient(uname, pass, name, address, type);
+            LD.Add_Patient(uname, pass, name, DOB, address, PO, type);
             System.out.println("Can be created");
         }
         else{

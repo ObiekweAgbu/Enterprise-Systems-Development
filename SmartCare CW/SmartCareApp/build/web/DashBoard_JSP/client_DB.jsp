@@ -15,5 +15,8 @@
         Welcome
         <%=request.getParameter("UserID")%>
         <h1>Client Dashboard</h1>
+        <form action="Adding_Employee_Servlet">
+            <input type="submit" value="Adding new Dotor or Nurse" />
+        </form>
     </body>
 </html>

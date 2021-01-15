@@ -35,7 +35,9 @@
                 <tr>
                     <td>cID</td>
                     <td>cName</td>
+                    <td>cDOB</td>
                     <td>cAddress</td>
+                    <td>cPO</td>
                     <td>cType</td>
                     <td>uName</td>
                 </tr>
@@ -68,7 +70,9 @@
                 <tr>
                     <td><%=rs.getInt("cID") %></td>
                     <td><%=rs.getString("cName") %></td>
+                    <td><%=rs.getString("cDOB") %></td>
                     <td><%=rs.getString("cAddress") %></td>
+                    <td><%=rs.getString("cPO") %></td>
                     <td><%=rs.getString("cType") %></td>
                     <td><%=rs.getString("uName") %></td>
                 </tr>
@@ -109,7 +113,9 @@
                 <tr>
                     <td><%=rs.getInt("cID") %></td>
                     <td><%=rs.getString("cName") %></td>
+                    <td><%=rs.getString("cDOB") %></td>
                     <td><%=rs.getString("cAddress") %></td>
+                    <td><%=rs.getString("cPO") %></td>
                     <td><%=rs.getString("cType") %></td>
                     <td><%=rs.getString("uName") %></td>
                 </tr>

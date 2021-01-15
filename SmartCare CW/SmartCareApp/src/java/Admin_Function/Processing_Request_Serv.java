@@ -22,9 +22,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Lil Shil
  */
-@WebServlet(name = "Adding_Employee_Servlet", urlPatterns = {"/Adding_Employee_Servlet"})
-
-public class Adding_Employee_Servlet extends HttpServlet {
+@WebServlet(name = "Processing_Request_Serv", urlPatterns = {"/Processing_Request_Serv"})
+public class Processing_Request_Serv extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,18 +36,22 @@ public class Adding_Employee_Servlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-       String eName = request.getParameter("eName");
-       String eDOB = request.getParameter("eDOB");
-       String eAddress = request.getParameter("eAddress");
-       String ePO = request.getParameter("ePO");
-       String uName = request.getParameter("uName");
-       String ePass = request.getParameter("ePass");
-       String Role = request.getParameter("Role");
-       
-       
-       LoginData LD = new LoginData();
-       LD.Add_Request(eName, eDOB, eAddress, ePO, uName, ePass, Role);
-       
+        StringBuilder sb = new StringBuilder();
+        for(String i : request.getParameterValues("DeleteOrAdd")){
+        sb.append(i);
+        }
+        LoginData LD = new LoginData();
+        if(request.getParameter("AddBT") != null){
+            LD.Add_From_Request(sb.toString());
+            System.out.println("Time to Add");
+        }
+        else{
+            for(int i = 0; i < sb.length();i++){
+                LD.Delete_From_Request(Character.toString(sb.charAt(i)));
+            }
+            System.out.println("Time to Delete");
+        }
+        System.out.println("IDs ne: " + sb.toString());
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -63,8 +66,11 @@ public class Adding_Employee_Servlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       RequestDispatcher rd = request.getRequestDispatcher("Adding_Doctor_Nurse.jsp");
-       rd.forward(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(Processing_Request_Serv.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -81,7 +87,7 @@ public class Adding_Employee_Servlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(Adding_Employee_Servlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Processing_Request_Serv.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -83,7 +83,7 @@ public class LoginData {
         return true;
     }
     
-    public void Add_Patient(String uname,String pass,String name, String address,String Type) throws SQLException{
+    public void Add_Patient(String uname,String pass,String name, String DOB, String address,String PO,String Type) throws SQLException{
         try {
         Class.forName(driverName);
         } catch (ClassNotFoundException e) {
@@ -97,8 +97,8 @@ public class LoginData {
         String q1 = "INSERT INTO `demo`.`users` (`uname`, `passwd`, `job`) VALUES (";
         String q2 = "'"+ uname+"', '"+pass+"', '"+job+"')";
         
-        String q3 = "INSERT INTO `demo`.`clients` (`cName`, `cAddress`, `cType`, `uName`) VALUES (";
-        String q4 = "'"+name +"', '"+ address+"', '"+Type+"', '"+uname+"')";
+        String q3 = "INSERT INTO `demo`.`clients` (`cName`, `cDOB`, `cAddress`, `cPO`, `cType`, `uName`) VALUES (";
+        String q4 = "'"+name +"', '"+ DOB+"', '"+ address+"', '"+ PO+"', '"+Type+"', '"+uname+"')";
         
         String InsertToUser = q1+q2;
         String InsertToClient = q3+q4;
@@ -111,7 +111,7 @@ public class LoginData {
         
     }
     
-    public void Add_Doc_or_Nurse(String eName, String eAddress, String uName, String ePass, String Role) throws SQLException{
+    public void Add_Doc_or_Nurse(String eName,String ePO, String eDOB, String eAddress, String uName, String ePass, String Role) throws SQLException{
         try {
         Class.forName(driverName);
         } catch (ClassNotFoundException e) {
@@ -124,8 +124,8 @@ public class LoginData {
         String q1 = "INSERT INTO `demo`.`users` (`uname`, `passwd`, `job`) VALUES (";
         String q2 = "'"+ uName+"', '"+ePass+"', '"+Role+"')";
         
-        String q3 = "INSERT INTO `demo`.`employee` (`eName`, `eAddress`, `uName`) VALUES ('";
-        String q4 = eName + "', '" + eAddress + "', '" + uName + "')";
+        String q3 = "INSERT INTO `demo`.`employee` (`eName`, `eAddress`,`ePO`, `uName`,`eDOB`) VALUES ('";
+        String q4 = eName + "', '" + eAddress + "', '" + ePO+ "', '" + uName + "', '" + eDOB + "')";
         String InsertToUser = q1+q2;
         String InsertToEmployee = q3+q4;
         
@@ -135,6 +135,125 @@ public class LoginData {
         ms.executeUpdate(InsertToEmployee);
         
         System.out.println("Added Doctor or Nurse");
+        
+    }
+    
+    public void Add_Request(String eName, String eDOB, String eAddress, String ePO, String uName, String ePass, String Role) throws SQLException{
+    try {
+        Class.forName(driverName);
+        } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+        }
+        
+        Connection con = null;
+        Statement ms = null;
+        ResultSet rs = null;
+        
+        String q1 = "INSERT INTO `demo`.`adding_request` (`rName`, `rDOB`, `rAddress`, `rPO`, `rUname`, `rPW`, `rJob`) VALUES ( ";
+        String q2 = "'" + eName +"','"+eDOB+"','"+eAddress+"','"+ePO+"','"+uName+"','"+ePass+"','"+Role+"');";
+        
+        String InsertToRequest = q1+q2;
+        con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+        ms = con.createStatement();
+        ms.executeUpdate(InsertToRequest);
+        
+        System.out.println("Added REquest");
+    }
+    
+    public void Add_From_Request(String IDs){
+        
+        try {
+        Class.forName(driverName);
+        } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+        }
+        
+        Connection con = null;
+        Statement ms = null;
+        ResultSet rs = null;
+        
+        try{
+            String q = "SELECT * FROM demo.adding_request where rID=";
+            con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+            List<Request> list = new ArrayList<>();
+            for(int i = 0 ; i < IDs.length();i++){
+                int id = Character.getNumericValue(IDs.charAt(i));
+                ms = con.createStatement();
+                rs = ms.executeQuery(q + Integer.toString(id));
+                
+                while(rs.next()){
+                Request nq = new Request();
+                nq.setID(rs.getString("rID"));
+                nq.setName(rs.getString("rName"));
+                nq.setDOB(rs.getString("rDOB"));
+                nq.setAddress(rs.getString("rAddress"));
+                nq.setPO(rs.getString("rPO"));
+                nq.setUname(rs.getString("rUname"));
+                nq.setPW(rs.getString("rPW"));
+                nq.setJob(rs.getString("rJob"));
+                list.add(nq);
+                }
+            }
+            for(Request i : list){
+                Add_Doc_or_Nurse(i.getName(), i.getPO(), i.getDOB(), i.getAddress(), i.getUname(), i.getPW(), i.getJob());
+                Delete_From_Request(i.getID());
+            }
+        }
+        catch (Exception e){
+            
+        }
+    }
+    public List<Request> Display_Request() throws SQLException{
+        String q1 = "SELECT * FROM demo.adding_request;";
+        try {
+        Class.forName(driverName);
+        } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+        }
+        
+        Connection con = null;
+        Statement ms = null;
+        ResultSet rs = null;
+        
+        con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+        ms = con.createStatement();
+        rs = ms.executeQuery(q1);
+        
+        List<Request> list = new ArrayList<Request>();
+        
+        while(rs.next()){
+            Request rq = new Request();
+            rq.setID(rs.getString("rID"));
+            rq.setName(rs.getString("rName"));
+            rq.setDOB(rs.getString("rDOB"));
+            rq.setAddress(rs.getString("rAddress"));
+            rq.setPO(rs.getString("rPO"));
+            rq.setUname(rs.getString("rUname"));
+            rq.setPW(rs.getString("rPW"));
+            rq.setJob(rs.getString("rJob"));
+            list.add(rq);
+        }
+        return list;
+        
+    }
+
+    public void Delete_From_Request(String id) throws SQLException {
+        try {
+        Class.forName(driverName);
+        } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+        }
+        
+        Connection con = null;
+        Statement ms = null;
+        ResultSet rs = null;
+        String q = "DELETE FROM demo.adding_request where rID =" + id;
+        con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+        ms = con.createStatement();
+        ms.executeUpdate(q);
+        
+        System.out.println("Deleted ID: " + id +"from Request");
+        
         
     }
 }

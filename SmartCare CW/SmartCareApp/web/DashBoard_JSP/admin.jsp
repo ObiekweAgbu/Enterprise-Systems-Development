@@ -21,6 +21,7 @@
         <form action="Adding_Employee_Servlet">
             <input type="submit" value="Adding new Dotor or Nurse" />
         </form>
+        <a href="Admin_JSP/Approve_Request.jsp">Approve Request </a> 
     </body>
     
 </html>
