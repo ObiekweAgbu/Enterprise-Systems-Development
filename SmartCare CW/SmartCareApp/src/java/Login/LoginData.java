@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -124,8 +126,8 @@ public class LoginData {
         String q1 = "INSERT INTO `demo`.`users` (`uname`, `passwd`, `job`) VALUES (";
         String q2 = "'"+ uName+"', '"+ePass+"', '"+Role+"')";
         
-        String q3 = "INSERT INTO `demo`.`employee` (`eName`, `eAddress`,`ePO`, `uName`,`eDOB`) VALUES ('";
-        String q4 = eName + "', '" + eAddress + "', '" + ePO+ "', '" + uName + "', '" + eDOB + "')";
+        String q3 = "INSERT INTO `demo`.`employee` (`eName`, `eAddress`,`ePO`, `uName`,`eDOB`,eRole) VALUES ('";
+        String q4 = eName + "', '" + eAddress + "', '" + ePO+ "', '" + uName + "', '" + eDOB + "', '" +Role+"')";
         String InsertToUser = q1+q2;
         String InsertToEmployee = q3+q4;
         
@@ -255,5 +257,89 @@ public class LoginData {
         System.out.println("Deleted ID: " + id +"from Request");
         
         
+    }
+    
+    public List<String> Get_Doc_Nurse_List (int mode) throws SQLException{
+        JSONArray arr = new JSONArray();
+        JSONObject tmp;
+        List<String> tempList = new ArrayList<>();
+        
+        try {
+        Class.forName(driverName);
+        } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+        }
+        
+        Connection con = null;
+        Statement ms = null;
+        ResultSet rs = null;
+        String q = null;
+        
+        if(mode == 1){
+            q = "SELECT * FROM demo.employee where eRole='doctor';";
+        }
+        else{
+            q = "SELECT * FROM demo.employee where eRole='nurse';";
+        }
+        con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+        ms = con.createStatement();
+        rs = ms.executeQuery(q);
+        
+        while(rs.next()){
+            tmp = new JSONObject();
+            tmp.put("name", rs.getString("eName"));
+            arr.put(tmp);
+            tempList.add(rs.getString("eName"));
+        }
+        return tempList;
+    }
+    public List<String> Time_Gene(){
+    List<String> tempList = new ArrayList<>();
+    String hour = "9";
+    String minute = "00";
+    
+    while(!hour.equals("18") || !minute.equals("15")){
+        StringBuilder sb = new StringBuilder();
+        sb.append(hour);
+        sb.append(":");
+        sb.append(minute);
+        if(minute.equals("45")){
+            int h = Integer.parseInt(hour);
+            h = h + 1;
+            hour = Integer.toString(h);
+            minute = "00"; 
+        }
+        else{
+            int mini = Integer.parseInt(minute);
+            mini += 15;
+            minute = Integer.toString(mini);
+        }
+        System.out.println(sb.toString());
+        tempList.add(sb.toString());
+    }
+    return tempList;
+    }
+    
+    public List<String> getServ() throws SQLException{
+        List<String> tempList = new ArrayList<>();
+        try {
+        Class.forName(driverName);
+        } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+        }
+        
+        Connection con = null;
+        Statement ms = null;
+        ResultSet rs = null;
+        
+        String q = "SELECT * FROM demo.services";
+        con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+        ms = con.createStatement();
+        rs = ms.executeQuery(q);
+        
+        while(rs.next()){
+            tempList.add(rs.getString("sName"));
+        }
+        return tempList;
     }
 }
