@@ -21,7 +21,7 @@
         <script>
             var list ;
             $(function () {
-                $("#datepicker").datepicker({ dateFormat: 'dd-mm-yy' });
+                $("#datepicker").datepicker({ dateFormat: 'yy-mm-dd' });
             });
             $(document).ready(function(){
                 $("#TimeSelect").click(function(){
@@ -34,6 +34,8 @@
         </script>
     </head>
     <body>
+        Welcome
+        <%= session.getAttribute("user")%>
         <Pre>
         <form action="${pageContext.request.contextPath}/Booking_Serv">
 <!--            <label for="datepicker">Enter Your Date of Birth:</label>--> 

@@ -5,8 +5,12 @@
  */
 package Client_Function;
 
+import Login.LoginData;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,9 +32,28 @@ public class Booking_Serv extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         String date = request.getParameter("date");
+        String time = request.getParameter("Time");
+        String ename = request.getParameter("Employ_List");
+        String serv = request.getParameter("Serv");
+        String uname = (String) request.getSession().getAttribute("user");
+        LoginData LD = new LoginData();
+        String slot = LD.get_Slot_From_Service_Name(serv);
         System.out.println(date);
+        System.out.println(time);
+        System.out.println(ename);
+        System.out.println(serv);
+        System.out.println(uname);
+        if(LD.check_Book_Slot(date, time, ename)){
+            System.out.println("Can be added");
+            LD.Insert_To_Booking(ename, uname, date, time, serv, slot);
+        }
+            
+        else{
+          System.out.println("This slot is taken");
+        }
+        
                
     }
 
@@ -46,7 +69,11 @@ public class Booking_Serv extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(Booking_Serv.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -60,7 +87,11 @@ public class Booking_Serv extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(Booking_Serv.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

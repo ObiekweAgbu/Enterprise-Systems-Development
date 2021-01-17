@@ -18,5 +18,8 @@
         <form action="Adding_Employee_Servlet">
             <input type="submit" value="Adding new Dotor or Nurse" />
         </form>
+        <a href="Functionalities/Book_Doctor.jsp">Book Appointment With Doctor</a><br>
+        <a href="Functionalities/Book_Nurse.jsp">Book Appointment With Nurse</a> 
+
     </body>
 </html>

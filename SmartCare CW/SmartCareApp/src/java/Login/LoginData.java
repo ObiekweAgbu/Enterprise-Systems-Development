@@ -6,8 +6,11 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -295,15 +298,15 @@ public class LoginData {
     }
     public List<String> Time_Gene(){
     List<String> tempList = new ArrayList<>();
-    String hour = "9";
+    String hour = "09";
     String minute = "00";
     
-    while(!hour.equals("18") || !minute.equals("15")){
+    while(!hour.equals("18") || !minute.equals("10")){
         StringBuilder sb = new StringBuilder();
         sb.append(hour);
         sb.append(":");
         sb.append(minute);
-        if(minute.equals("45")){
+        if(minute.equals("50")){
             int h = Integer.parseInt(hour);
             h = h + 1;
             hour = Integer.toString(h);
@@ -311,10 +314,9 @@ public class LoginData {
         }
         else{
             int mini = Integer.parseInt(minute);
-            mini += 15;
+            mini += 10;
             minute = Integer.toString(mini);
         }
-        System.out.println(sb.toString());
         tempList.add(sb.toString());
     }
     return tempList;
@@ -342,4 +344,131 @@ public class LoginData {
         }
         return tempList;
     }
+    
+    public void Insert_To_Booking(String eName, String cUname, String sDate, String sTime,String sName,String sSlot) throws SQLException{
+        try {
+        Class.forName(driverName);
+        } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+        }
+        String eID = get_eID_from_Name(eName);
+        String cID = get_uID_from_Uname(cUname);
+        sTime = sTime + ":00";
+        Connection con = null;
+        Statement ms = null;
+        ResultSet rs = null;
+        
+        String q1 = "INSERT INTO `demo`.`booking_slots` (`eID`, `cID`, `sDate`, `sTime`, `sName`, `sSlot`) VALUES (' ";
+        String q2 = eID + "','"+cID+ "','"+sDate+ "','"+sTime+ "','"+sName+ "','"+sSlot+"');";
+        try {
+            con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+            ms = con.createStatement();
+            ms.executeUpdate(q1+q2);
+            System.out.println("Added to Booking");
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    public boolean check_Book_Slot(String sDate, String sTime,String eName) throws SQLException{
+        List<String> timeList = Time_Gene();
+        try {
+        Class.forName(driverName);
+        } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+        }
+        String eID = get_eID_from_Name(eName);
+        Connection con = null;
+        Statement ms = null;
+        ResultSet rs = null;
+        
+        String q = "SELECT * FROM demo.booking_slots where eID = '" + eID +"' and sDate ='" + sDate +"'";
+        con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+        ms = con.createStatement();
+        rs = ms.executeQuery(q);
+        while(rs.next()){
+            String time = rs.getTime("sTime").toString();
+            
+            int slot = Integer.parseInt(rs.getString("sSlot"));
+            time = time.substring(0, 5);
+            System.out.println("Time from mysql " + time);
+            int index = timeList.indexOf(time);
+            for(int i = 0; i < slot;i++){
+                timeList.set(index, "!");
+                index++;
+            }
+        }
+        if(timeList.contains(sTime)){
+            return true;
+        }
+        return false;
+    }
+    
+    public String get_eID_from_Name(String eName) throws SQLException{
+        try {
+        Class.forName(driverName);
+        } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+        }
+        
+        Connection con = null;
+        Statement ms = null;
+        ResultSet rs = null;
+        String eID = "";
+        String q = "SELECT * FROM demo.employee where eName = '" + eName +"'";
+        con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+        ms = con.createStatement();
+        rs = ms.executeQuery(q);
+        
+        while(rs.next()){
+            eID = rs.getString("eID");
+        }
+        return eID;
+    }
+    
+    public String get_uID_from_Uname(String Uname) throws SQLException{
+        try {
+        Class.forName(driverName);
+        } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+        }
+        
+        Connection con = null;
+        Statement ms = null;
+        ResultSet rs = null;
+        String eID = "";
+        String q = "SELECT * FROM demo.clients where uName = '" + Uname +"'";
+        con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+        ms = con.createStatement();
+        rs = ms.executeQuery(q);
+        
+        while(rs.next()){
+            eID = rs.getString("cID");
+        }
+        return eID;
+    }
+    
+    public String get_Slot_From_Service_Name(String sName) throws SQLException{
+        try {
+        Class.forName(driverName);
+        } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+        }
+        
+        Connection con = null;
+        Statement ms = null;
+        ResultSet rs = null;
+        String eID = "";
+        String q = "SELECT * FROM demo.services where sName = '" + sName +"'";
+        con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+        ms = con.createStatement();
+        rs = ms.executeQuery(q);
+        
+        while(rs.next()){
+            eID = rs.getString("sSlot");
+        }
+        return eID;
+    }
+    
 }

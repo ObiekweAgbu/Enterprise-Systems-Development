@@ -51,22 +51,26 @@ public class LoginController extends HttpServlet {
             
             if(temp.equals("admin")){
                 HttpSession session = request.getSession();
+                session.setAttribute("user", user);
                 RequestDispatcher rd = request.getRequestDispatcher("DashBoard_JSP/admin.jsp");
                 rd.forward(request, response);
             }
             else if(temp.equals("client")){
                 HttpSession session = request.getSession();
+                session.setAttribute("user", user);
                 RequestDispatcher rd = request.getRequestDispatcher("DashBoard_JSP/client_DB.jsp");
                 rd.forward(request, response);
                 
             }
             else if(temp.equals("nurse")){
                 HttpSession session = request.getSession();
+                session.setAttribute("user", user);
                 RequestDispatcher rd = request.getRequestDispatcher("DashBoard_JSP/Nurse_DB.jsp");
                 rd.forward(request, response);
             }
             else if(temp.equals("doctor")){
                 HttpSession session = request.getSession();
+                session.setAttribute("user", user);
                 RequestDispatcher rd = request.getRequestDispatcher("DashBoard_JSP/Doctor_DB.jsp");
                 rd.forward(request, response);
             }
