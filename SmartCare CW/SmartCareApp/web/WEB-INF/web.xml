@@ -29,6 +29,10 @@
         <servlet-name>Booking_Serv</servlet-name>
         <servlet-class>Client_Function.Booking_Serv</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>To_Operate</servlet-name>
+        <servlet-class>Em_Function.To_Operate</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.htm</url-pattern>
@@ -52,6 +56,10 @@
     <servlet-mapping>
         <servlet-name>Booking_Serv</servlet-name>
         <url-pattern>/Booking_Serv</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>To_Operate</servlet-name>
+        <url-pattern>/To_Operate</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

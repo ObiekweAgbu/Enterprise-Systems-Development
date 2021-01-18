@@ -262,6 +262,23 @@ public class LoginData {
         
     }
     
+    public void Delete_From_Booking(String sID) throws SQLException{
+        try {
+        Class.forName(driverName);
+        } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+        }
+        
+        Connection con = null;
+        Statement ms = null;
+        ResultSet rs = null;
+        String q = "DELETE FROM demo.booking_slots where sID =" + sID;
+        con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+        ms = con.createStatement();
+        ms.executeUpdate(q);
+        System.out.println("Deleted ID:" + sID +" from booking");
+    }
+    
     public List<String> Get_Doc_Nurse_List (int mode) throws SQLException{
         JSONArray arr = new JSONArray();
         JSONObject tmp;
@@ -449,6 +466,27 @@ public class LoginData {
         return eID;
     }
     
+    public String get_cName_From_cID(String cID) throws SQLException{
+        try {
+        Class.forName(driverName);
+        } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+        }
+        
+        Connection con = null;
+        Statement ms = null;
+        ResultSet rs = null;
+        String eID = "";
+        String q = "SELECT * FROM demo.clients where cID = '" + cID +"'";
+        con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+        ms = con.createStatement();
+        rs = ms.executeQuery(q);
+        
+        while(rs.next()){
+            eID = rs.getString("cName");
+        }
+        return eID;
+    }
     public String get_Slot_From_Service_Name(String sName) throws SQLException{
         try {
         Class.forName(driverName);
@@ -470,5 +508,131 @@ public class LoginData {
         }
         return eID;
     }
-    
+   public String get_EID_From_Uname(String Uname) throws SQLException{
+    try {
+        Class.forName(driverName);
+        } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+        }
+        
+        Connection con = null;
+        Statement ms = null;
+        ResultSet rs = null;
+        String eID = "";
+        String q = "SELECT * FROM demo.employee where uName = '" + Uname +"'";
+        con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+        ms = con.createStatement();
+        rs = ms.executeQuery(q);
+        
+        while(rs.next()){
+            eID = rs.getString("eID");
+        }
+        return eID;
+   }
+   public List<Booking_OBJ> get_Booking_List(String Uname,String Date) throws SQLException{
+       List<Booking_OBJ> tempList = new ArrayList<>();
+       String eID = get_EID_From_Uname(Uname);
+       System.out.println("eID in Book List " + eID);
+       try {
+        Class.forName(driverName);
+        } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+        }
+        
+       
+        Connection con = null;
+        Statement ms = null;
+        ResultSet rs = null;
+        String q = "SELECT * FROM demo.booking_slots where eID = '" + eID +"' and sDate = '" + Date +"'";
+        con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+        ms = con.createStatement();
+        rs = ms.executeQuery(q);
+       
+        while(rs.next()){
+        Booking_OBJ bko = new Booking_OBJ();
+        bko.setcID(get_cName_From_cID(rs.getString("cID")));
+        bko.setsID(rs.getString("sID"));
+        bko.setsName(rs.getString("sName"));
+        bko.setsTime(rs.getString("sTime"));
+        tempList.add(bko);
+        }
+       return tempList;
+   }
+   
+   public Booking_OBJ get_Booking_by_ID(String sID) throws SQLException{
+       Booking_OBJ bk = new Booking_OBJ();
+       try {
+        Class.forName(driverName);
+        } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+        }
+        
+       
+        Connection con = null;
+        Statement ms = null;
+        ResultSet rs = null;
+        String q = "SELECT * FROM demo.booking_slots where sID = '" + sID +"'";
+        con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+        ms = con.createStatement();
+        rs = ms.executeQuery(q);
+        
+        while(rs.next()){
+            bk.setsID(rs.getString("sID"));
+            bk.seteID(rs.getString("eID"));
+            bk.setcID(rs.getString("cID"));
+            bk.setsDate(rs.getString("sDate"));
+            bk.setsTime(rs.getString("sTime"));
+            bk.setsName(rs.getString("sName"));
+            bk.setsSlot(rs.getString("sSlot"));
+        }
+        
+        return bk;
+   }
+   
+   public String Serv_Price_By_sName(String sName) throws SQLException{
+       String temp = "";
+       
+       try {
+        Class.forName(driverName);
+        } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+        }
+        
+       
+        Connection con = null;
+        Statement ms = null;
+        ResultSet rs = null;
+        String q = "SELECT * FROM demo.services where sName = '" + sName +"'";
+        con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+        ms = con.createStatement();
+        rs = ms.executeQuery(q);
+        while(rs.next()){
+            temp = rs.getString("sPrice");
+        }
+       return temp;
+   }
+   
+   public void Insert_To_Operation(Booking_OBJ bk) throws SQLException{
+       try {
+        Class.forName(driverName);
+        } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+        }
+        String charge = Serv_Price_By_sName(bk.getsName());
+        Connection con = null;
+        Statement ms = null;
+        ResultSet rs = null;
+        
+        String q1 = "INSERT INTO `demo`.`operations` (`eID`, `cID`, `oDate`, `oTime`, `nSlot`, `charge`) VALUES (' ";
+        String q2 = bk.geteID() + "','"+bk.getcID()+ "','"+bk.getsDate()+ "','"+bk.getsTime()+ "','"+bk.getsSlot()+ "','"+charge+"');";
+        try {
+            con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+            ms = con.createStatement();
+            ms.executeUpdate(q1+q2);
+            System.out.println("Added to Operation");
+            Delete_From_Booking(bk.getsID());
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+   }
 }

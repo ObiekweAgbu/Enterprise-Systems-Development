@@ -12,6 +12,14 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <%
+        String un = (String) session.getAttribute("user");
+        System.out.println(un);
+        if(!un.equals("admin")){
+            response.sendRedirect("Denied.jsp");
+        }
+        %>
+        
         Welcome
         <%=request.getParameter("UserID")%>
         <h1>admin Dashboard</h1>

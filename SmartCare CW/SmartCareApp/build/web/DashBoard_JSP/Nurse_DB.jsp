@@ -15,5 +15,6 @@
         Welcome
         <%=request.getParameter("UserID")%>
         <h1>Nurse Dashboard</h1>
+        <a href="Functionalities/Show_Booking.jsp">Show Booking</a>
     </body>
 </html>

@@ -1,6 +1,6 @@
 <%-- 
-    Document   : Doctor_DB
-    Created on : Dec 16, 2020, 9:23:21 PM
+    Document   : Denied
+    Created on : Jan 18, 2021, 12:50:21 AM
     Author     : Lil Shil
 --%>
 
@@ -12,9 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        Welcome
-        <%=request.getParameter("UserID")%>
-        <h1>Doctor_DashBoard</h1>
-        <a href="Functionalities/Show_Booking.jsp">Show Booking</a>
+        <h1>Hey fucker you are not admin</h1>
     </body>
 </html>

@@ -42,7 +42,6 @@ public class Session_Filter implements Filter {
             System.out.println("Session is still up");
         }
         chain.doFilter(request, response);
-        
     }
 
     @Override
