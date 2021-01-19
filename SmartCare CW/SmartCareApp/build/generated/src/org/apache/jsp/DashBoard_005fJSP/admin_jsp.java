@@ -53,11 +53,10 @@ public final class admin_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    <body>\r\n");
       out.write("        ");
 
-        String un = (String) request.getParameter("UserID");
+        String un = (String) session.getAttribute("user");
         System.out.println(un);
         if(!un.equals("admin")){
-            RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
-            rd.forward(request, response);
+            response.sendRedirect("Denied.jsp");
         }
         
       out.write("\r\n");
@@ -74,6 +73,12 @@ public final class admin_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            <input type=\"submit\" value=\"Adding new Dotor or Nurse\" />\r\n");
       out.write("        </form>\r\n");
       out.write("        <a href=\"Admin_JSP/Approve_Request.jsp\">Approve Request </a> \r\n");
+      out.write("        <br>\r\n");
+      out.write("        <br>\r\n");
+      out.write("        <br>\r\n");
+      out.write("        <a href=\"");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${pageContext.request.contextPath}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("/Log_Out.jsp\">Log out</a>\r\n");
       out.write("    </body>\r\n");
       out.write("    \r\n");
       out.write("</html>\r\n");
