@@ -25,5 +25,10 @@
             </select><br>
             <input type="submit" value="Register" />
         </form>
+        
+        <br>
+        <br>
+        <br>
+        <a href="${pageContext.request.contextPath}/Log_Out.jsp">Log out</a>
     </body>
 </html>

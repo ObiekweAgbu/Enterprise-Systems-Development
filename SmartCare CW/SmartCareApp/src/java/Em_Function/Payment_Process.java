@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Lil Shil
  */
-public class Op_Delay extends HttpServlet {
+public class Payment_Process extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,20 +34,16 @@ public class Op_Delay extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-        StringBuilder sb = new StringBuilder();
         LoginData LD = new LoginData();
-        for(String i : request.getParameterValues("Delete_Or_Move")){
-            sb.append(i);
+        if(request.getParameter("Paid") != null){
+            StringBuilder sb = new StringBuilder();
+            for(String i : request.getParameterValues("get_iIDS")){
+                sb.append(i);
+            }
+            LD.Pay_All(sb.toString());
         }
-        if(request.getParameter("Del") != null){
-            LD.Delete_From_Op(sb.toString());
-        }
-        else{
-            LD.set_Op_To_Process(sb.toString());
-        }
-        
-        request.getRequestDispatcher("Functionalities/Show_Operation.jsp").forward(request, response);
-        
+        RequestDispatcher rd = request.getRequestDispatcher("Functionalities/Show_Booking.jsp");
+        rd.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -65,7 +61,7 @@ public class Op_Delay extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(Op_Delay.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Payment_Process.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -83,7 +79,7 @@ public class Op_Delay extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(Op_Delay.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Payment_Process.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

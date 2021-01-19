@@ -27,6 +27,12 @@
                 }
                 
             }
+            function no_Select(){
+                if(document.querySelectorAll('input[type = "checkbox"]:checked').length == 0){
+                    alert("You have to choose at least one");
+                    return false;
+                }
+            }
         </script>
     </head>
     <body>
@@ -63,7 +69,7 @@
                     <td><%= ProOpL.get(i).getsName() %></td>
                     <td><%= ProOpL.get(i).getnSlot() %></td>
                     <td><%= ProOpL.get(i).getCharge()%></td>
-                    <td> <input type="checkbox" name="get_OID" value="<%= ProOpL.get(i).getoID() %>" id="Pro" /> </td>
+                    <td> <input type="checkbox" name="get_OID" value="<%= ProOpL.get(i).getoID() %>" /> </td>
                 </tr>
                 <%
                   }
@@ -73,7 +79,7 @@
             
             <input type="submit" value="Add Prescription" name="To_Pres" onclick ="return select_check();"/>
             <input type="submit" value="Go to Payment" name="To_Payment" onclick ="return select_check();"/>
-            <input type="submit" value="Delay" name="To_Delay" />
+            <input type="submit" value="Delay" name="To_Delay" onclick ="return no_Select();"/>
             <br>
          </form>
     <form action="${pageContext.request.contextPath}/Op_Delay">
@@ -112,9 +118,12 @@
                   %>
             </tbody>
         </table>
-            <input type="submit" value="Delete Opearion" name="Del" />
-            <input type="submit" value="Move to Process" name="to_Pro" />
+            <input type="submit" value="Delete Opearion" name="Del" onclick ="return no_Select();"/>
+            <input type="submit" value="Move to Process" name="to_Pro" onclick ="return no_Select();"/>
 </form>
-        
+        <br>
+        <br>
+        <br>
+        <a href="${pageContext.request.contextPath}/Log_Out.jsp">Log out</a>
     </body>
 </html>

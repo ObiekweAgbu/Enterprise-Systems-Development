@@ -30,6 +30,10 @@
             <input type="submit" value="Adding new Dotor or Nurse" />
         </form>
         <a href="Admin_JSP/Approve_Request.jsp">Approve Request </a> 
+        <br>
+        <br>
+        <br>
+        <a href="${pageContext.request.contextPath}/Log_Out.jsp">Log out</a>
     </body>
     
 </html>

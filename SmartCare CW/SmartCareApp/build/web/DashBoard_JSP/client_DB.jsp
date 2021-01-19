@@ -20,6 +20,10 @@
         </form>
         <a href="Functionalities/Book_Doctor.jsp">Book Appointment With Doctor</a><br>
         <a href="Functionalities/Book_Nurse.jsp">Book Appointment With Nurse</a> 
-
+        
+        <br>
+        <br>
+        <br>
+        <a href="${pageContext.request.contextPath}/Log_Out.jsp">Log out</a>
     </body>
 </html>

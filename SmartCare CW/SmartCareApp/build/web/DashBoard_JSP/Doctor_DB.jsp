@@ -16,5 +16,9 @@
         <%=request.getParameter("UserID")%>
         <h1>Doctor_DashBoard</h1>
         <a href="Functionalities/Show_Booking.jsp">Show Booking</a>
+        <br>
+        <br>
+        <br>
+        <a href="${pageContext.request.contextPath}/Log_Out.jsp">Log out</a>
     </body>
 </html>

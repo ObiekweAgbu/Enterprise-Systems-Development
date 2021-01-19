@@ -28,8 +28,7 @@
         <%
         String date = request.getParameter("date");
         session.setAttribute("Date_Book", date);
-//        String uName = (String) request.getSession().getAttribute("user");
-        String uName = "eaydin";
+        String uName = (String) request.getSession().getAttribute("user");
         session.setAttribute("uName_Book", uName);
         LoginData LD = new LoginData();
         if(date != null){
@@ -83,5 +82,9 @@
             }
         }
         %>
+        <br>
+        <br>
+        <br>
+        <a href="${pageContext.request.contextPath}/Log_Out.jsp">Log out</a>
     </body>
 </html>

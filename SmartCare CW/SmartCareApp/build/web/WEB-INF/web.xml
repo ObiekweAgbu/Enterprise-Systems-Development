@@ -41,6 +41,14 @@
         <servlet-name>Op_Delay</servlet-name>
         <servlet-class>Em_Function.Op_Delay</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Payment_Process</servlet-name>
+        <servlet-class>Em_Function.Payment_Process</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>From_Prep_To_Pay</servlet-name>
+        <servlet-class>Em_Function.From_Prep_To_Pay</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.htm</url-pattern>
@@ -76,6 +84,14 @@
     <servlet-mapping>
         <servlet-name>Op_Delay</servlet-name>
         <url-pattern>/Op_Delay</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Payment_Process</servlet-name>
+        <url-pattern>/Payment_Process</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>From_Prep_To_Pay</servlet-name>
+        <url-pattern>/From_Prep_To_Pay</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

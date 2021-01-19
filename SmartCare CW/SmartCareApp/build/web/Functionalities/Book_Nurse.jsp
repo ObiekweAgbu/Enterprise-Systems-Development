@@ -78,6 +78,10 @@
             </select>
             <input type="submit" value="Submit">
         </form>
-        </pre>    
+        </pre> 
+            <br>
+        <br>
+        <br>
+        <a href="${pageContext.request.contextPath}/Log_Out.jsp">Log out</a>
     </body>
 </html>

@@ -673,4 +673,221 @@ public class LoginData {
        }
        return opL;
    }
+   
+   public void From_Op_To_Payment(String oID) throws SQLException{
+       Connection con = null;
+       Statement ms = null;
+       ResultSet rs = null;
+       Operation op = new Operation();
+       String q = "SELECT * FROM demo.operations where oID = '" +oID+"' ";
+       con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+       ms = con.createStatement();
+       rs = ms.executeQuery(q);
+       while(rs.next()){
+           op.setoID(rs.getString("oID"));
+           op.seteID(rs.getString("eID"));
+           op.setcID(rs.getString("cID"));
+           op.setoDate(rs.getString("oDate"));
+           op.setoTime(rs.getString("oTime"));
+           op.setnSlot(rs.getString("nSlot"));
+           op.setCharge(rs.getString("charge"));
+           op.setStatus(rs.getString("status"));
+           op.setsName(rs.getString("sName"));
+       }
+       
+       String q2 = "INSERT INTO `demo`.`invoice` (`cID`, `sName`, `dName`, `total`,`status`) VALUES ('";
+       String q3 = op.getcID() +"','"+ op.getsName()+"','No Drug','"+op.getCharge()+"','unpaid') ;";
+       ms = con.createStatement();
+       ms.executeUpdate(q2+q3);
+       System.out.println("Added to invoice without Drug");
+       
+       String q4 = "DELETE FROM `demo`.`operations` WHERE (`oID` ='";
+       String q5 = op.getoID() + "');";
+       ms = con.createStatement();
+       ms.executeUpdate(q4+q5);
+       
+       System.out.println("Delete from operation");
+       
+       
+   }
+   
+   public List<Drug> Drug_List() throws SQLException{
+       List<Drug> DL = new ArrayList<>();
+       
+       Connection con = null;
+       Statement ms = null;
+       ResultSet rs = null;
+       Operation op = new Operation();
+       String q = "SELECT * FROM demo.drugs;";
+       con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+       ms = con.createStatement();
+       rs = ms.executeQuery(q);
+       
+       while(rs.next()){
+           Drug nd = new Drug();
+           nd.setdID(rs.getString("dID"));
+           nd.setdName(rs.getString("dName"));
+           nd.setdPrice(rs.getString("dPrice"));
+           nd.setdCat(rs.getString("dCategory"));
+           DL.add(nd);
+       }
+       
+       
+       return DL;
+   }
+   
+   public String get_cID_From_oID(String oID) throws SQLException{
+       String cID = "";
+       Connection con = null;
+       Statement ms = null;
+       ResultSet rs = null;
+       Operation op = new Operation();
+       String q = "SELECT * FROM demo.operations where oID = '" +oID+"' ";
+       con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+       ms = con.createStatement();
+       rs = ms.executeQuery(q);
+       
+       while(rs.next()){
+        cID = rs.getString("cID");
+       }
+       return cID;
+   }
+   
+   public List<Invoice> get_Invoice_From_cID(String cID) throws SQLException{
+       List<Invoice> InL = new ArrayList<>();
+       Connection con = null;
+       Statement ms = null;
+       ResultSet rs = null;
+       String q = "SELECT * FROM demo.invoice where cID = '" +cID+"' ";
+       con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+       ms = con.createStatement();
+       rs = ms.executeQuery(q);
+       
+       while(rs.next()){
+           Invoice inv = new Invoice();
+           inv.setiID(rs.getString("iID"));
+           inv.setcID(rs.getString("cID"));
+           inv.setsName(rs.getString("sName"));
+           inv.setdName(rs.getString("dName"));
+           inv.setTotal(rs.getString("total"));
+           inv.setStatus(rs.getString("status"));
+           InL.add(inv);
+       }
+       return InL;
+   }
+   public String get_DrPrice_from_drName(String drName) throws SQLException{
+       String drPrice = "";
+       Operation otemp = new Operation();
+       Connection con = null;
+       Statement ms = null;
+       ResultSet rs = null;
+       String q = "SELECT * FROM demo.drugs where dName = '" + drName + "'";
+       con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+       ms = con.createStatement();
+       rs = ms.executeQuery(q);
+       
+       while(rs.next()){
+           drPrice = rs.getString("dPrice");
+       }
+       return drPrice;
+   }
+   public void From_Pre_To_Pay(String oID, String drName, String drQuan,String drNote) throws SQLException{
+       Operation otemp = new Operation();
+       Connection con = null;
+       Statement ms = null;
+       ResultSet rs = null;
+       Operation op = new Operation();
+       String q = "SELECT * FROM demo.operations where oID = '" +oID+"' ";
+       con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+       ms = con.createStatement();
+       rs = ms.executeQuery(q);
+       String drPrice = get_DrPrice_from_drName(drName);
+       while(rs.next()){
+          otemp.setoID(oID);
+          otemp.setcID(rs.getString("cID"));
+          otemp.seteID(rs.getString("eID"));
+          otemp.setoDate(rs.getString("oDate"));
+          otemp.setCharge(rs.getString("charge"));
+          otemp.setsName(rs.getString("sName"));
+       }
+       
+       double drP = Double.parseDouble(drPrice) * Double.parseDouble(drQuan);
+       double opCharge = Double.parseDouble(otemp.getCharge());
+       String Final_Price = Double.toString(drP+opCharge);
+       String q4 = "INSERT INTO `demo`.`prescription` (`cID`, `eID`, `drName`, `drQuan`, `drNote`, `drTotal`, `prDate`) VALUES ('";
+       String q5 = otemp.getcID() + "','" + otemp.geteID()+ "','" + drName+ "','" +drQuan+ "','" +drNote+ "','" +Double.toString(drP)+ "','" + otemp.getoDate() + "');";
+       ms = con.createStatement();
+       ms.executeUpdate(q4+q5);
+       System.out.println("Insert to Prescription");
+       
+       String q2 = "INSERT INTO `demo`.`invoice` (`cID`, `sName`, `dName`, `total`,`status`) VALUES ('";
+       String q3 = otemp.getcID() +"','"+ otemp.getsName()+"','"+drName+"','"+Final_Price+"', 'unpaid');";
+       ms = con.createStatement();
+       ms.executeUpdate(q2+q3);
+       
+       System.out.println("Insert to invoice");
+       
+       String q6 = "DELETE FROM `demo`.`operations` WHERE (`oID` ='";
+       String q7 = otemp.getoID() + "');";
+       ms = con.createStatement();
+       ms.executeUpdate(q6+q7);
+       
+       System.out.println("Delete from operation");
+       
+       
+   }
+   
+   public void set_Op_To_Delay(String OIDS) throws SQLException{
+       Connection con = null;
+       Statement ms = null;
+       ResultSet rs = null;
+       con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+
+       for(int i = 0; i < OIDS.length(); i++){
+           String q = "UPDATE `demo`.`operations` SET `status` = 'delay' WHERE (`oID` = '";
+           String q2 = Character.toString(OIDS.charAt(i)) + "');";
+           ms = con.createStatement();
+           ms.executeUpdate(q+q2);
+       }
+   }
+   public void set_Op_To_Process(String OIDS) throws SQLException{
+       Connection con = null;
+       Statement ms = null;
+       ResultSet rs = null;
+       con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+
+       for(int i = 0; i < OIDS.length(); i++){
+           String q = "UPDATE `demo`.`operations` SET `status` = 'processing' WHERE (`oID` = '";
+           String q2 = Character.toString(OIDS.charAt(i)) + "');";
+           ms = con.createStatement();
+           ms.executeUpdate(q+q2);
+       }
+   }
+   public void Delete_From_Op(String OIDs) throws SQLException{
+       Connection con = null;
+       Statement ms = null;
+       ResultSet rs = null;
+       con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+
+       for(int i = 0; i < OIDs.length(); i++){
+           String q6 = "DELETE FROM `demo`.`operations` WHERE (`oID` ='";
+           String q7 = Character.toString(OIDs.charAt(i)) + "');";
+           ms = con.createStatement();
+           ms.executeUpdate(q6+q7);
+       }
+   }
+   
+   public void Pay_All(String iIDS) throws SQLException{
+       Connection con = null;
+       Statement ms = null;
+       ResultSet rs = null;
+       con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+   
+       for(int i = 0; i < iIDS.length(); i++){
+           String q = "UPDATE `demo`.`invoice` SET `status` = 'paid' WHERE (`iID` = '";
+           String q2 = Character.toString(iIDS.charAt(i)) + "');";
+           ms = con.createStatement();
+           ms.executeUpdate(q+q2);
+       }
+   }
 }

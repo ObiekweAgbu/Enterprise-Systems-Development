@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Lil Shil
  */
-public class Op_Delay extends HttpServlet {
+public class From_Prep_To_Pay extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,20 +34,15 @@ public class Op_Delay extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-        StringBuilder sb = new StringBuilder();
         LoginData LD = new LoginData();
-        for(String i : request.getParameterValues("Delete_Or_Move")){
-            sb.append(i);
-        }
-        if(request.getParameter("Del") != null){
-            LD.Delete_From_Op(sb.toString());
-        }
-        else{
-            LD.set_Op_To_Process(sb.toString());
-        }
-        
-        request.getRequestDispatcher("Functionalities/Show_Operation.jsp").forward(request, response);
-        
+        String drName = request.getParameter("Dr_Name");
+        String drQuan = request.getParameter("dr_Quan");
+        String drNote = request.getParameter("dr_Note");
+        String oID = (String) request.getSession().getAttribute("oID_to_Pres");
+        System.out.println("OID to Pres " + oID);
+        LD.From_Pre_To_Pay(oID, drName, drQuan, drNote);
+        RequestDispatcher rd = request.getRequestDispatcher("Functionalities/Payment.jsp");
+        rd.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -65,7 +60,7 @@ public class Op_Delay extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(Op_Delay.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(From_Prep_To_Pay.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -83,7 +78,7 @@ public class Op_Delay extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(Op_Delay.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(From_Prep_To_Pay.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
