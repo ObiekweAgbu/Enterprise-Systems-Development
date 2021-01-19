@@ -27,7 +27,10 @@
         <jsp:include page="Select Date.jsp" />
         <%
         String date = request.getParameter("date");
-        String uName = (String) request.getSession().getAttribute("user");
+        session.setAttribute("Date_Book", date);
+//        String uName = (String) request.getSession().getAttribute("user");
+        String uName = "eaydin";
+        session.setAttribute("uName_Book", uName);
         LoginData LD = new LoginData();
         if(date != null){
             List<Booking_OBJ> bko = LD.get_Booking_List(uName, date);
@@ -37,6 +40,8 @@
             if(bko.isEmpty()){
         %>
             You don't have any booking for today
+            <a href="Show_Operation.jsp">To Operation</a>
+
             <%
             }
         else{
@@ -72,7 +77,7 @@
                 <input type="submit" value="Process Booking" name="Add" onclick="return MoreThanOneCheck();" />
                 <input type="submit" value="Delete" />
         </form>
-        
+
         
         <%
             }

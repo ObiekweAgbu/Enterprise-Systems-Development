@@ -33,6 +33,14 @@
         <servlet-name>To_Operate</servlet-name>
         <servlet-class>Em_Function.To_Operate</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>From_Operation</servlet-name>
+        <servlet-class>Em_Function.From_Operation</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Op_Delay</servlet-name>
+        <servlet-class>Em_Function.Op_Delay</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.htm</url-pattern>
@@ -60,6 +68,14 @@
     <servlet-mapping>
         <servlet-name>To_Operate</servlet-name>
         <url-pattern>/To_Operate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>From_Operation</servlet-name>
+        <url-pattern>/From_Operation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Op_Delay</servlet-name>
+        <url-pattern>/Op_Delay</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

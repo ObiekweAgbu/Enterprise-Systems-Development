@@ -26,6 +26,11 @@ import org.json.JSONObject;
  */
 public class LoginData {
     public LoginData() {
+         try {
+        Class.forName(driverName);
+        } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+        }
     }
     String driverName = "com.mysql.jdbc.Driver";
     String connectionUrl = "jdbc:mysql://localhost:3306/";
@@ -623,8 +628,8 @@ public class LoginData {
         Statement ms = null;
         ResultSet rs = null;
         
-        String q1 = "INSERT INTO `demo`.`operations` (`eID`, `cID`, `oDate`, `oTime`, `nSlot`, `charge`) VALUES (' ";
-        String q2 = bk.geteID() + "','"+bk.getcID()+ "','"+bk.getsDate()+ "','"+bk.getsTime()+ "','"+bk.getsSlot()+ "','"+charge+"');";
+        String q1 = "INSERT INTO `demo`.`operations` (`eID`, `cID`, `oDate`, `oTime`, `nSlot`, `charge`, `status`, `sName`) VALUES (' ";
+        String q2 = bk.geteID() + "','"+bk.getcID()+ "','"+bk.getsDate()+ "','"+bk.getsTime()+ "','"+bk.getsSlot()+ "','"+charge+"', 'processing', '" + bk.getsName()+ "');";
         try {
             con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
             ms = con.createStatement();
@@ -634,5 +639,38 @@ public class LoginData {
         } catch (SQLException ex) {
             Logger.getLogger(LoginData.class.getName()).log(Level.SEVERE, null, ex);
         }
+   }
+   
+   public List<Operation> get_Op(int mode, String Uname,String Date) throws SQLException{
+       List<Operation> opL = new ArrayList<>();
+       Connection con = null;
+       Statement ms = null;
+       ResultSet rs = null;
+       String eID = get_EID_From_Uname(Uname);
+       String q = "";
+       if(mode == 0){
+           q = "SELECT * FROM demo.operations where status ='processing' and eID ='"+ eID+"' and oDate ='" +Date+"';";
+       }
+       else{
+           q = "SELECT * FROM demo.operations where status ='delay';";
+       }
+       con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+       ms = con.createStatement();
+       rs = ms.executeQuery(q);
+       
+       while(rs.next()){
+           Operation op = new Operation();
+           op.setoID(rs.getString("oID"));
+           op.seteID(rs.getString("eID"));
+           op.setcID(rs.getString("cID"));
+           op.setoDate(rs.getString("oDate"));
+           op.setoTime(rs.getString("oTime"));
+           op.setnSlot(rs.getString("nSlot"));
+           op.setCharge(rs.getString("charge"));
+           op.setStatus(rs.getString("status"));
+           op.setsName(rs.getString("sName"));
+           opL.add(op);
+       }
+       return opL;
    }
 }

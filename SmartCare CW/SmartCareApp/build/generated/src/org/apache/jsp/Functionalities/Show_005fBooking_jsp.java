@@ -53,8 +53,17 @@ public final class Show_005fBooking_jsp extends org.apache.jasper.runtime.HttpJs
       out.write("<!DOCTYPE html>\n");
       out.write("<html>\n");
       out.write("    <head>\n");
+      out.write("        <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js\"></script>\n");
       out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
       out.write("        <title>JSP Page</title>\n");
+      out.write("        <script>\n");
+      out.write("            function MoreThanOneCheck(){\n");
+      out.write("                if(document.querySelectorAll('input[type = \"checkbox\"]:checked').length > 1){\n");
+      out.write("                alert(\"You can only process one at a time\");\n");
+      out.write("                return false;\n");
+      out.write("            }\n");
+      out.write("            }\n");
+      out.write("        </script>\n");
       out.write("    </head>\n");
       out.write("    <body>\n");
       out.write("        ");
@@ -63,6 +72,7 @@ public final class Show_005fBooking_jsp extends org.apache.jasper.runtime.HttpJs
       out.write("        ");
 
         String date = request.getParameter("date");
+//        String uName = (String) request.getSession().getAttribute("user");
         String uName = "eaydin";
         LoginData LD = new LoginData();
         if(date != null){
@@ -84,8 +94,10 @@ public final class Show_005fBooking_jsp extends org.apache.jasper.runtime.HttpJs
         else{
             
       out.write("\n");
-      out.write("        <form action=\"To_Operate\">        \n");
-      out.write("            <table>\n");
+      out.write("        <form action=\"");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${pageContext.request.contextPath}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("/To_Operate\">        \n");
+      out.write("            <table border = \"1\">\n");
       out.write("                <thead>\n");
       out.write("                    <th>Booking ID</th>\n");
       out.write("                    <th>Client Name</th>\n");
@@ -112,6 +124,11 @@ public final class Show_005fBooking_jsp extends org.apache.jasper.runtime.HttpJs
       out.write("                        <td>");
       out.print( bko.get(i).getsName() );
       out.write("</td>\n");
+      out.write("                        <td>\n");
+      out.write("                        <input type=\"checkbox\" name=\"ProcessOrDelete\" value=\"");
+      out.print(bko.get(i).getsID());
+      out.write("\" />\n");
+      out.write("                    </td>\n");
       out.write("                    </tr>\n");
       out.write("                    ");
 
@@ -121,7 +138,8 @@ public final class Show_005fBooking_jsp extends org.apache.jasper.runtime.HttpJs
       out.write("                </tbody>\n");
       out.write("                \n");
       out.write("            </table>               \n");
-      out.write("                <input type=\"submit\" value=\"Process Booking\" />   \n");
+      out.write("                <input type=\"submit\" value=\"Process Booking\" name=\"Add\" onclick=\"return MoreThanOneCheck();\" />\n");
+      out.write("                <input type=\"submit\" value=\"Delete\" />\n");
       out.write("        </form>\n");
       out.write("        \n");
       out.write("        \n");
@@ -131,6 +149,7 @@ public final class Show_005fBooking_jsp extends org.apache.jasper.runtime.HttpJs
         }
         
       out.write("\n");
+      out.write("        <a href=\"Show_Operation.jsp\">To Operation</a>\n");
       out.write("    </body>\n");
       out.write("</html>\n");
     } catch (Throwable t) {
