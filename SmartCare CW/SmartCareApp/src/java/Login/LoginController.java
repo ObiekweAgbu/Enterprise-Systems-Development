@@ -1,5 +1,7 @@
 package Login;
 
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -7,7 +9,7 @@ package Login;
  */
 
 
-import Login.LoginData;
+
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.springframework.http.HttpRequest;
 
 /**
@@ -47,20 +50,28 @@ public class LoginController extends HttpServlet {
             String temp = d.checkLog(user, pass);
             
             if(temp.equals("admin")){
-                RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
+                HttpSession session = request.getSession();
+                session.setAttribute("user", user);
+                RequestDispatcher rd = request.getRequestDispatcher("DashBoard_JSP/admin.jsp");
                 rd.forward(request, response);
             }
             else if(temp.equals("client")){
-                RequestDispatcher rd = request.getRequestDispatcher("client_DB.jsp");
+                HttpSession session = request.getSession();
+                session.setAttribute("user", user);
+                RequestDispatcher rd = request.getRequestDispatcher("DashBoard_JSP/client_DB.jsp");
                 rd.forward(request, response);
                 
             }
             else if(temp.equals("nurse")){
-                RequestDispatcher rd = request.getRequestDispatcher("Nurse_DB.jsp");
+                HttpSession session = request.getSession();
+                session.setAttribute("user", user);
+                RequestDispatcher rd = request.getRequestDispatcher("DashBoard_JSP/Nurse_DB.jsp");
                 rd.forward(request, response);
             }
             else if(temp.equals("doctor")){
-                RequestDispatcher rd = request.getRequestDispatcher("Doctor_DB.jsp");
+                HttpSession session = request.getSession();
+                session.setAttribute("user", user);
+                RequestDispatcher rd = request.getRequestDispatcher("DashBoard_JSP/Doctor_DB.jsp");
                 rd.forward(request, response);
             }
             else if (temp.equals("!")){

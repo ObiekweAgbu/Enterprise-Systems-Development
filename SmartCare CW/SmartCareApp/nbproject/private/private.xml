@@ -3,19 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/obiek/OneDrive/Documents/NetBeansProjects/Enterprise-Systems-Development/SmartCare%20CW/SmartCareApp/web/index.jsp</file>
-            <file>file:/C:/Users/obiek/OneDrive/Documents/NetBeansProjects/Enterprise-Systems-Development/SmartCare%20CW/SmartCareApp/web/META-INF/Suc.jsp</file>
-            <file>file:/C:/Users/obiek/OneDrive/Documents/NetBeansProjects/Enterprise-Systems-Development/SmartCare%20CW/SmartCareApp/src/java/model/Jdbc.java</file>
-            <file>file:/C:/Users/obiek/OneDrive/Documents/NetBeansProjects/Enterprise-Systems-Development/SmartCare%20CW/SmartCareApp/src/java/com/LoginController.java</file>
-            <file>file:/C:/Users/obiek/OneDrive/Documents/NetBeansProjects/Enterprise-Systems-Development/SmartCare%20CW/SmartCareApp/web/META-INF/context.xml</file>
-            <file>file:/C:/Users/obiek/OneDrive/Documents/NetBeansProjects/Enterprise-Systems-Development/SmartCare%20CW/SmartCareApp/web/META-INF/doctor.jsp</file>
-            <file>file:/C:/Users/obiek/OneDrive/Documents/NetBeansProjects/Enterprise-Systems-Development/SmartCare%20CW/SmartCareApp/src/java/com/UserListener.java</file>
-            <file>file:/C:/Users/obiek/OneDrive/Documents/NetBeansProjects/Enterprise-Systems-Development/SmartCare%20CW/SmartCareApp/web/index.html</file>
-            <file>file:/C:/Users/obiek/OneDrive/Documents/NetBeansProjects/Enterprise-Systems-Development/SmartCare%20CW/SmartCareApp/src/java/model/Account.java</file>
-            <file>file:/C:/Users/obiek/OneDrive/Documents/NetBeansProjects/Enterprise-Systems-Development/SmartCare%20CW/SmartCareApp/nbproject/build-impl.xml</file>
-            <file>file:/C:/Users/obiek/OneDrive/Documents/NetBeansProjects/Enterprise-Systems-Development/SmartCare%20CW/SmartCareApp/web/META-INF/Login.jsp</file>
-            <file>file:/C:/Users/obiek/OneDrive/Documents/NetBeansProjects/Enterprise-Systems-Development/SmartCare%20CW/SmartCareApp/src/java/model/LoginData.java</file>
-            <file>file:/C:/Users/obiek/OneDrive/Documents/NetBeansProjects/Enterprise-Systems-Development/SmartCare%20CW/SmartCareApp/web/META-INF/redirect.jsp</file>
+            <file>file:/C:/Users/Lil%20Shil/workspace/Enterprise-Systems-Development_2/SmartCare%20CW/SmartCareApp/web/Admin_JSP/Select_Employee.jsp</file>
+            <file>file:/C:/Users/Lil%20Shil/workspace/Enterprise-Systems-Development_2/SmartCare%20CW/SmartCareApp/web/Login.jsp</file>
+            <file>file:/C:/Users/Lil%20Shil/workspace/Enterprise-Systems-Development_2/SmartCare%20CW/SmartCareApp/web/Functionalities/Pa_Del_BKO.jsp</file>
+            <file>file:/C:/Users/Lil%20Shil/workspace/Enterprise-Systems-Development_2/SmartCare%20CW/SmartCareApp/web/Functionalities/Book_Doctor.jsp</file>
+            <file>file:/C:/Users/Lil%20Shil/workspace/Enterprise-Systems-Development_2/SmartCare%20CW/SmartCareApp/web/Functionalities/Show_Operation.jsp</file>
+            <file>file:/C:/Users/Lil%20Shil/workspace/Enterprise-Systems-Development_2/SmartCare%20CW/SmartCareApp/web/Functionalities/Note_To_Spe.jsp</file>
+            <file>file:/C:/Users/Lil%20Shil/workspace/Enterprise-Systems-Development_2/SmartCare%20CW/SmartCareApp/web/Functionalities/Book_Nurse.jsp</file>
+            <file>file:/C:/Users/Lil%20Shil/workspace/Enterprise-Systems-Development_2/SmartCare%20CW/SmartCareApp/web/assets/user/css/style.css</file>
         </group>
     </open-files>
 </project-private>

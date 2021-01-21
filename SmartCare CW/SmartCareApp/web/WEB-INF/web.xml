@@ -4,25 +4,122 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>/WEB-INF/applicationContext.xml</param-value>
     </context-param>
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-    <listener>
-        <description>ServletContextListener</description>
-        <listener-class>com.UserServlet</listener-class>
-    </listener>
     <servlet>
         <servlet-name>dispatcher</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <load-on-startup>2</load-on-startup>
     </servlet>
+    <servlet>
+        <servlet-name>Reg_Controller</servlet-name>
+        <servlet-class>Login.Reg_Controller</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>View_Patient_Servlet</servlet-name>
+        <servlet-class>Admin_Function.View_Patient_Servlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Adding_Employee_Servlet</servlet-name>
+        <servlet-class>Admin_Function.Adding_Employee_Servlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Processing_Request_Serv</servlet-name>
+        <servlet-class>Admin_Function.Processing_Request_Serv</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Booking_Serv</servlet-name>
+        <servlet-class>Client_Function.Booking_Serv</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>To_Operate</servlet-name>
+        <servlet-class>Em_Function.To_Operate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>From_Operation</servlet-name>
+        <servlet-class>Em_Function.From_Operation</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Op_Delay</servlet-name>
+        <servlet-class>Em_Function.Op_Delay</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Payment_Process</servlet-name>
+        <servlet-class>Em_Function.Payment_Process</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>From_Prep_To_Pay</servlet-name>
+        <servlet-class>Em_Function.From_Prep_To_Pay</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Transfer_To_Spe</servlet-name>
+        <servlet-class>Em_Function.Transfer_To_Spe</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Delete_From_Booking</servlet-name>
+        <servlet-class>Admin_Function.Delete_From_Booking</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Delete_PA</servlet-name>
+        <servlet-class>Admin_Function.Delete_PA</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.htm</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Reg_Controller</servlet-name>
+        <url-pattern>/Reg_Controller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>View_Patient_Servlet</servlet-name>
+        <url-pattern>/View_Patient_Servlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Adding_Employee_Servlet</servlet-name>
+        <url-pattern>/Adding_Employee_Servlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Processing_Request_Serv</servlet-name>
+        <url-pattern>/Processing_Request_Serv</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Booking_Serv</servlet-name>
+        <url-pattern>/Booking_Serv</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>To_Operate</servlet-name>
+        <url-pattern>/To_Operate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>From_Operation</servlet-name>
+        <url-pattern>/From_Operation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Op_Delay</servlet-name>
+        <url-pattern>/Op_Delay</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Payment_Process</servlet-name>
+        <url-pattern>/Payment_Process</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>From_Prep_To_Pay</servlet-name>
+        <url-pattern>/From_Prep_To_Pay</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Transfer_To_Spe</servlet-name>
+        <url-pattern>/Transfer_To_Spe</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Delete_From_Booking</servlet-name>
+        <url-pattern>/Delete_From_Booking</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Delete_PA</servlet-name>
+        <url-pattern>/Delete_PA</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
-            30
+            20
         </session-timeout>
     </session-config>
     <welcome-file-list>
