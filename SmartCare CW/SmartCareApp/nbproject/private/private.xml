@@ -4,12 +4,21 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Lil%20Shil/workspace/Enterprise-Systems-Development_2/SmartCare%20CW/SmartCareApp/web/Admin_JSP/Select_Employee.jsp</file>
+            <file>file:/C:/Users/Lil%20Shil/workspace/Enterprise-Systems-Development_2/SmartCare%20CW/SmartCareApp/web/Admin_JSP/Approve_Request.jsp</file>
+            <file>file:/C:/Users/Lil%20Shil/workspace/Enterprise-Systems-Development_2/SmartCare%20CW/SmartCareApp/web/Functionalities/Book_Doctor.jsp</file>
+            <file>file:/C:/Users/Lil%20Shil/workspace/Enterprise-Systems-Development_2/SmartCare%20CW/SmartCareApp/web/Admin_JSP/Edit_Booking.jsp</file>
+            <file>file:/C:/Users/Lil%20Shil/workspace/Enterprise-Systems-Development_2/SmartCare%20CW/SmartCareApp/src/java/Admin_Function/Delete_PA.java</file>
+            <file>file:/C:/Users/Lil%20Shil/workspace/Enterprise-Systems-Development_2/SmartCare%20CW/SmartCareApp/web/Functionalities/Note_To_Spe.jsp</file>
+            <file>file:/C:/Users/Lil%20Shil/workspace/Enterprise-Systems-Development_2/SmartCare%20CW/SmartCareApp/src/java/Admin_Function/Delete_From_Booking.java</file>
+            <file>file:/C:/Users/Lil%20Shil/workspace/Enterprise-Systems-Development_2/SmartCare%20CW/SmartCareApp/web/DashBoard_JSP/admin.jsp</file>
+            <file>file:/C:/Users/Lil%20Shil/workspace/Enterprise-Systems-Development_2/SmartCare%20CW/SmartCareApp/web/Admin_JSP/View_Patient.jsp</file>
+            <file>file:/C:/Users/Lil%20Shil/workspace/Enterprise-Systems-Development_2/SmartCare%20CW/SmartCareApp/web/DashBoard_JSP/Denied.jsp</file>
             <file>file:/C:/Users/Lil%20Shil/workspace/Enterprise-Systems-Development_2/SmartCare%20CW/SmartCareApp/web/Login.jsp</file>
             <file>file:/C:/Users/Lil%20Shil/workspace/Enterprise-Systems-Development_2/SmartCare%20CW/SmartCareApp/web/Functionalities/Pa_Del_BKO.jsp</file>
-            <file>file:/C:/Users/Lil%20Shil/workspace/Enterprise-Systems-Development_2/SmartCare%20CW/SmartCareApp/web/Functionalities/Book_Doctor.jsp</file>
             <file>file:/C:/Users/Lil%20Shil/workspace/Enterprise-Systems-Development_2/SmartCare%20CW/SmartCareApp/web/Functionalities/Show_Operation.jsp</file>
-            <file>file:/C:/Users/Lil%20Shil/workspace/Enterprise-Systems-Development_2/SmartCare%20CW/SmartCareApp/web/Functionalities/Note_To_Spe.jsp</file>
+            <file>file:/C:/Users/Lil%20Shil/workspace/Enterprise-Systems-Development_2/SmartCare%20CW/SmartCareApp/web/Admin_JSP/Adding_Doctor_Nurse.jsp</file>
             <file>file:/C:/Users/Lil%20Shil/workspace/Enterprise-Systems-Development_2/SmartCare%20CW/SmartCareApp/web/Functionalities/Book_Nurse.jsp</file>
+            <file>file:/C:/Users/Lil%20Shil/workspace/Enterprise-Systems-Development_2/SmartCare%20CW/SmartCareApp/web/Admin_JSP/Turn_Over.jsp</file>
             <file>file:/C:/Users/Lil%20Shil/workspace/Enterprise-Systems-Development_2/SmartCare%20CW/SmartCareApp/web/assets/user/css/style.css</file>
         </group>
     </open-files>

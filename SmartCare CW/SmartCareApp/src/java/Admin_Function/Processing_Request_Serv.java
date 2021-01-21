@@ -47,7 +47,6 @@ public class Processing_Request_Serv extends HttpServlet {
         }
         else{
             LD.Delete_From_Request(sb.toString());
-            
             System.out.println("Time to Delete");
         }
         System.out.println("IDs ne: " + sb.toString());
