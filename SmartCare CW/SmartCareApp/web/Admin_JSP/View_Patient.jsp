@@ -102,7 +102,7 @@ folder instead of downloading all of them to reduce the load. -->
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <img src="../assets/admin/images/Admin.png" class="user-image" alt="User Image">
                   <span class="hidden-xs">
-                    <%=request.getParameter("UserID")%>
+                    <%=session.getAttribute("user") %>
                   </span>
                 </a>
                 <ul class="dropdown-menu">
@@ -110,7 +110,7 @@ folder instead of downloading all of them to reduce the load. -->
                   <li class="user-header">
                     <img src="../assets/admin/images/Admin.png" class="img-circle" alt="User Image">
                     <p>
-                      <%=request.getParameter("UserID")%>
+                     <%=session.getAttribute("user") %>
                     </p>
                   </li>
                   <!-- Menu Footer-->
@@ -119,7 +119,7 @@ folder instead of downloading all of them to reduce the load. -->
                       <a href="#" class="btn btn-default btn-flat">Profile</a>
                     </div>
                     <div class="pull-right">
-                      <a href="" class="btn btn-default btn-flat">Sign out</a>
+                      <a href="${pageContext.request.contextPath}/Log_Out.jsp" class="btn btn-default btn-flat">Sign out</a>
                     </div>
                   </li>
                 </ul>
@@ -142,7 +142,7 @@ folder instead of downloading all of them to reduce the load. -->
               <img src="../assets/admin/images/Admin.png" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-              <p><%=request.getParameter("UserID")%></p>
+              <p><%=session.getAttribute("user") %></p>
               <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
           </div>
@@ -168,8 +168,10 @@ folder instead of downloading all of them to reduce the load. -->
               </a>
               <ul class="treeview-menu">
                 <li class="active"><a href="../Admin_JSP/View_Patient.jsp"><i class="fa fa-circle-o"></i> View Patient</a></li>
-                <li><a href="Adding_Doctor_Nurse.jsp"><i class="fa fa-circle-o"></i>Adding Doctor and Nurse</a></li>
+                <li><a href="../Admin_JSP/Adding_Doctor_Nurse.jsp"><i class="fa fa-circle-o"></i>Adding Doctor and Nurse</a></li>
                 <li><a href="../Admin_JSP/Approve_Request.jsp"><i class="fa fa-circle-o"></i>Approve Request</a></li>
+                <li><a href="../Admin_JSP/Select_Employee.jsp"><i class="fa fa-circle-o"></i>Edit Booking</a></li>
+                <li><a href="../Admin_JSP/Turn_Over.jsp"><i class="fa fa-circle-o"></i>Turn Over Fee</a></li>
               </ul>
             </li>
           </ul>
@@ -178,10 +180,11 @@ folder instead of downloading all of them to reduce the load. -->
       </aside>
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
-          <div class="box">
-            <div class="box-header">
-                <h3 class="box-title">Private</h3><br>
-            </div>
+          <form action="${pageContext.request.contextPath}/Delete_PA">
+              <div class="box">
+                  <div class="box-header">
+                      <h3 class="box-title">Private</h3><br>
+                  </div>
             <!-- /.box-header -->
             <div class="box-body">
               <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap"><div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div><div class="row"><div class="col-sm-12"><table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
@@ -228,6 +231,7 @@ folder instead of downloading all of them to reduce the load. -->
                     <td><%=rs.getString("cPO") %></td>
                     <td><%=rs.getString("cType") %></td>
                     <td><%=rs.getString("uName") %></td>
+                    <td><input type="checkbox" name="Pri_PA" value="<%=rs.getInt("cID") %>" /></td>
                 </tr>
                 <%
                 }
@@ -254,6 +258,7 @@ folder instead of downloading all of them to reduce the load. -->
             <div class="box-header">
               <h3 class="box-title">NHS</h3>
             </div>
+                
             <!-- /.box-header -->
             <div class="box-body">
               <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap"><div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div><div class="row"><div class="col-sm-12"><table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
@@ -282,6 +287,7 @@ folder instead of downloading all of them to reduce the load. -->
                     <td><%=rs.getString("cPO") %></td>
                     <td><%=rs.getString("cType") %></td>
                     <td><%=rs.getString("uName") %></td>
+                    <td><input type="checkbox" name="NHS_PA" value="<%=rs.getInt("cID") %>" /></td>
                 </tr>
                                 <%
                     }
@@ -307,12 +313,29 @@ folder instead of downloading all of them to reduce the load. -->
             </div>
             <!-- /.box-body -->
           </div>
+                <input type="submit" value="Delete" onclick="return noCheck();"/>
+                </form> 
       </div>
+                
       <!-- /.content-wrapper -->
       <footer class="main-footer">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script>
+            function noCheck(){
+                if(document.querySelectorAll('input[type = "checkbox"]:checked').length == 0){
+                alert("You have to choose at least 1");
+                return false;
+            }
+            if(document.querySelectorAll('input[type = "checkbox"]:checked').length > 1){
+                alert("You can only delete one at a time");
+                return false;
+            }
+        }
+        </script>
         <strong>Copyright QuanBui-MinhNguyen-Xuer-KhanhLam-NiceMan</strong> 
       </footer>
         </div>
       </aside>
   </body>
-        
+</html>

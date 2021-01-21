@@ -46,13 +46,15 @@ public class Reg_Controller extends HttpServlet {
         boolean NotExist = LD.check_Reg(uname);
         if(NotExist){
             LD.Add_Patient(uname, pass, name, DOB, address, PO, type);
-            response.sendRedirect("Login.jsp");
+            response.sendRedirect("homepage.jsp");
             System.out.println("Can be created");
         }
         else{
             System.out.println("Cannot be created");
         }
+        
     }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

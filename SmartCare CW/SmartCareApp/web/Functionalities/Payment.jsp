@@ -8,12 +8,33 @@
 <%@page import="Login.Invoice"%>
 <%@page import="Login.LoginData"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="./assets/user/css/grid.css">
+        <link rel="stylesheet" type="text/css" href="./assets/user/css/style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;1,300&display=swap" rel="stylesheet">
         <title>JSP Page</title>
+        <style>
+            table {broder: 0; }
+         
+            th, td {
+                border: 1px solid black;
+                text-align: center;
+                font-size: 80%;
+                border-collapse: separate;
+                padding: 20px 30px;
+            }
+                         .Container{
+                display: flex;
+                justify-content: center;
+                margin: 100px auto;
+                
+            }
+        </style>
+        
         <script>
             function noCheck(){
                 if(document.querySelectorAll('input[type = "checkbox"]:checked').length == 0){
@@ -24,6 +45,8 @@
         </script>
     </head>
     <body>
+        <div class="Container">
+        <section>
         <%
         LoginData LD = new LoginData();
         String cID = (String) session.getAttribute("cID_to_Pres");
@@ -34,7 +57,7 @@
         %>
         
         <form action="${pageContext.request.contextPath}/Payment_Process">
-            <table border="1">
+            <table>
                 <thead>
                     <tr>
                         <th>Invoice ID</th>
@@ -42,7 +65,7 @@
                         <th>Service</th>
                         <th>Drug</th>
                         <th>Total</th>
-                        <th></th>
+                        <th>Check Box</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -64,14 +87,23 @@
                 </tbody>
             </table>
                 
-                <br>
-                <h1>Total: </h1> <%=total %>
-                <input type="submit" value="Pay Now" name="Paid" onclick = "return noCheck();"/>
-                <input type="submit" value="Pay Later " name="Unpaid" onclick = "return noCheck();"/>
+            <div class="row">
+                    <div class="col span-1-of-3">
+                        <h4>Total:<%=total %> </h4> 
+                    </div>
+                    
+	            <div class="col span-1-of-3">
+			<input type="submit" value="Pay Now" name="Paid" onclick = "return noCheck();"/>
+		    </div>
+                    
+                    <div class="col span-1-of-3">
+                        <input type="submit" value="Pay Later " name="Unpaid" onclick = "return noCheck();"/>
+		    </div>
+	    </div>  
         </form>
-                <br>
-        <br>
-        <br>
-        <a href="${pageContext.request.contextPath}/Log_Out.jsp">Log out</a>
+        </section>
+        </div>
+        <!--<a href="${pageContext.request.contextPath}/Log_Out.jsp">Log out</a>-->
     </body>
 </html>
+

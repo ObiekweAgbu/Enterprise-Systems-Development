@@ -53,6 +53,7 @@ public class Booking_Serv extends HttpServlet {
         else{
           System.out.println("This slot is taken");
         }
+        request.getRequestDispatcher("DashBoard_JSP/client_DB.jsp").forward(request, response);
         
                
     }

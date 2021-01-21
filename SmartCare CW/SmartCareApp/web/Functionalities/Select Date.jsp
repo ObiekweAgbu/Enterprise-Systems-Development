@@ -22,11 +22,33 @@
             });
             
         </script>
+        <link rel="stylesheet" type="text/css" href="./assets/user/css/grid.css">
+        <link rel="stylesheet" type="text/css" href="./assets/user/css/style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;1,300&display=swap" rel="stylesheet">
     </head>
-    <body>
-        <form action="Show_Booking.jsp">
-            Choose your date: <input type="text" name="date" id="datepicker">
-            <input type="submit" value="OK" />
-        </form>
+<body>
+        <section class="section-spacing">
+            <form action="Show_Booking.jsp">
+                    <div class="row">
+			<div class="col span-2-of-4">
+				<label for="datepicker">Choose your date:</label>
+			</div>
+			<div class="col span-3-of-4">
+				<input id="datepicker" type="text" name="date" placeholder="yy-mm-dd" value="">
+			</div>
+		    </div>
+                 
+                    <div class="row">
+			<div class="col span-1-of-3">
+				<label>&nbsp;</label>
+			</div>
+			<div class="col span-2-of-3">
+				<input type="submit" value="OK" class="btn btn-1">
+			</div>
+		    </div>
+<!--            Choose your date: <input type="text" name="date" id="datepicker">
+            <input type="submit" value="OK" />-->
+            </form>
+        </section> 
     </body>
 </html>

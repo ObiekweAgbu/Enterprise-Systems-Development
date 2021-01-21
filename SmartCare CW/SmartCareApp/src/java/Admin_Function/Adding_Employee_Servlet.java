@@ -17,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -48,8 +49,19 @@ public class Adding_Employee_Servlet extends HttpServlet {
        
        LoginData LD = new LoginData();
        LD.Add_Request(eName, eDOB, eAddress, ePO, uName, ePass, Role);
-       
+       String direction = "";
+       HttpSession ss =request.getSession();
+       String user = (String) ss.getAttribute("user");
+       if(user.equals("admin")){
+           direction = "DashBoard_JSP/admin.jsp";
+       }else{
+           direction = "DashBoard_JSP/client_DB.jsp";
+       }
+       RequestDispatcher rd = request.getRequestDispatcher(direction);
+       rd.forward(request, response);
     }
+    
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

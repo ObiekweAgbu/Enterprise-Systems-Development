@@ -49,6 +49,18 @@
         <servlet-name>From_Prep_To_Pay</servlet-name>
         <servlet-class>Em_Function.From_Prep_To_Pay</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Transfer_To_Spe</servlet-name>
+        <servlet-class>Em_Function.Transfer_To_Spe</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Delete_From_Booking</servlet-name>
+        <servlet-class>Admin_Function.Delete_From_Booking</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Delete_PA</servlet-name>
+        <servlet-class>Admin_Function.Delete_PA</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.htm</url-pattern>
@@ -92,6 +104,18 @@
     <servlet-mapping>
         <servlet-name>From_Prep_To_Pay</servlet-name>
         <url-pattern>/From_Prep_To_Pay</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Transfer_To_Spe</servlet-name>
+        <url-pattern>/Transfer_To_Spe</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Delete_From_Booking</servlet-name>
+        <url-pattern>/Delete_From_Booking</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Delete_PA</servlet-name>
+        <url-pattern>/Delete_PA</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

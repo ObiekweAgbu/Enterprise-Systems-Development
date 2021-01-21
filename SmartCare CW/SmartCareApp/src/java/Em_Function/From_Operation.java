@@ -49,12 +49,13 @@ public class From_Operation extends HttpServlet {
             rd.forward(request, response);
         }
         else if(request.getParameter("To_Delay") != null){
-            StringBuilder sb = new StringBuilder();
-            for(String i : request.getParameterValues("get_OID")){
-                sb.append(i);
-            }
-            LD.set_Op_To_Delay(sb.toString());
+            LD.set_Op_To_Delay(oID);
+            System.out.println("oID ne: " + oID);
             RequestDispatcher rd = request.getRequestDispatcher("Functionalities/Show_Operation.jsp");
+            rd.forward(request, response);
+        }
+        else if(request.getParameter("To_SP") != null){
+            RequestDispatcher rd = request.getRequestDispatcher("Functionalities/Note_To_Spe.jsp");
             rd.forward(request, response);
         }
     }

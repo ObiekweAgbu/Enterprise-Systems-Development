@@ -59,6 +59,7 @@ public class LoginData {
                 System.out.print("Success");
                 return rs.getString("job");
             }
+            con.close();
         }
         catch (Exception e){
             
@@ -86,6 +87,7 @@ public class LoginData {
                 System.out.println("Alrd exist");
                 return false;
             }
+            con.close();
         }
         catch (Exception e){
             
@@ -118,7 +120,7 @@ public class LoginData {
         ms.executeUpdate(InsertToClient);
         
         System.out.println("Added client");
-        
+        con.close();
     }
     
     public void Add_Doc_or_Nurse(String eName,String ePO, String eDOB, String eAddress, String uName, String ePass, String Role) throws SQLException{
@@ -145,7 +147,7 @@ public class LoginData {
         ms.executeUpdate(InsertToEmployee);
         
         System.out.println("Added Doctor or Nurse");
-        
+        con.close();
     }
     
     public void Add_Request(String eName, String eDOB, String eAddress, String ePO, String uName, String ePass, String Role) throws SQLException{
@@ -168,6 +170,7 @@ public class LoginData {
         ms.executeUpdate(InsertToRequest);
         
         System.out.println("Added REquest");
+        con.close();
     }
     
     public void Add_From_Request(String IDs){
@@ -208,6 +211,7 @@ public class LoginData {
                 Add_Doc_or_Nurse(i.getName(), i.getPO(), i.getDOB(), i.getAddress(), i.getUname(), i.getPW(), i.getJob());
                 Delete_From_Request(i.getID());
             }
+            con.close();
         }
         catch (Exception e){
             
@@ -243,6 +247,7 @@ public class LoginData {
             rq.setJob(rs.getString("rJob"));
             list.add(rq);
         }
+        con.close();
         return list;
         
     }
@@ -263,7 +268,7 @@ public class LoginData {
         ms.executeUpdate(q);
         
         System.out.println("Deleted ID: " + id +"from Request");
-        
+        con.close();
         
     }
     
@@ -282,6 +287,7 @@ public class LoginData {
         ms = con.createStatement();
         ms.executeUpdate(q);
         System.out.println("Deleted ID:" + sID +" from booking");
+        con.close();
     }
     
     public List<String> Get_Doc_Nurse_List (int mode) throws SQLException{
@@ -316,6 +322,7 @@ public class LoginData {
             arr.put(tmp);
             tempList.add(rs.getString("eName"));
         }
+        con.close();
         return tempList;
     }
     public List<String> Time_Gene(){
@@ -341,6 +348,7 @@ public class LoginData {
         }
         tempList.add(sb.toString());
     }
+        
     return tempList;
     }
     
@@ -387,6 +395,7 @@ public class LoginData {
             ms = con.createStatement();
             ms.executeUpdate(q1+q2);
             System.out.println("Added to Booking");
+            con.close();
         } catch (SQLException ex) {
             Logger.getLogger(LoginData.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -424,6 +433,7 @@ public class LoginData {
         if(timeList.contains(sTime)){
             return true;
         }
+        con.close();
         return false;
     }
     
@@ -446,7 +456,76 @@ public class LoginData {
         while(rs.next()){
             eID = rs.getString("eID");
         }
+        con.close();
         return eID;
+    }
+    public String get_eUname_From_eName(String eName) throws SQLException{
+        String eUname = "";
+        
+        try {
+        Class.forName(driverName);
+        } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+        }
+        
+        Connection con = null;
+        Statement ms = null;
+        ResultSet rs = null;
+        String q = "SELECT * FROM demo.employee where eName = '" + eName +"'";
+        con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+        ms = con.createStatement();
+        rs = ms.executeQuery(q);
+        
+        while(rs.next()){
+            eUname = rs.getString("uName");
+        }
+        con.close();
+        return eUname;
+    }
+    public String get_eName_From_eID(String eID) throws SQLException{
+        try {
+        Class.forName(driverName);
+        } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+        }
+        
+        Connection con = null;
+        Statement ms = null;
+        ResultSet rs = null;
+        String eName = "";
+        String q = "SELECT * FROM demo.employee where eID = '" + eID +"'";
+        con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+        ms = con.createStatement();
+        rs = ms.executeQuery(q);
+        
+        while(rs.next()){
+            eName = rs.getString("eName");
+        }
+        con.close();
+        return eName;
+    }
+    
+    public String get_cID_From_cUname(String cUname) throws SQLException{
+        try {
+        Class.forName(driverName);
+        } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+        }
+        
+        Connection con = null;
+        Statement ms = null;
+        ResultSet rs = null;
+        String cID = "";
+        String q = "SELECT * FROM demo.clients where uName = '" + cUname +"'";
+        con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+        ms = con.createStatement();
+        rs = ms.executeQuery(q);
+        
+        while(rs.next()){
+            cID = rs.getString("cID");
+        }
+        con.close();
+        return cID;
     }
     
     public String get_uID_from_Uname(String Uname) throws SQLException{
@@ -468,6 +547,7 @@ public class LoginData {
         while(rs.next()){
             eID = rs.getString("cID");
         }
+        con.close();
         return eID;
     }
     
@@ -490,6 +570,7 @@ public class LoginData {
         while(rs.next()){
             eID = rs.getString("cName");
         }
+        con.close();
         return eID;
     }
     public String get_Slot_From_Service_Name(String sName) throws SQLException{
@@ -511,6 +592,7 @@ public class LoginData {
         while(rs.next()){
             eID = rs.getString("sSlot");
         }
+        con.close();
         return eID;
     }
    public String get_EID_From_Uname(String Uname) throws SQLException{
@@ -532,6 +614,7 @@ public class LoginData {
         while(rs.next()){
             eID = rs.getString("eID");
         }
+        con.close();
         return eID;
    }
    public List<Booking_OBJ> get_Booking_List(String Uname,String Date) throws SQLException{
@@ -559,11 +642,39 @@ public class LoginData {
         bko.setsID(rs.getString("sID"));
         bko.setsName(rs.getString("sName"));
         bko.setsTime(rs.getString("sTime"));
+        bko.setsDate(rs.getString("sDate"));
+        bko.seteID(rs.getString("eID"));
+        bko.setsSlot(rs.getString("sSlot"));
         tempList.add(bko);
         }
+        con.close();
        return tempList;
    }
-   
+   public List<Booking_OBJ> get_PA_Booking_List(String uName) throws SQLException{
+       List<Booking_OBJ> tempList = new ArrayList<>();
+       String cID = get_cID_From_cUname(uName);
+       Connection con = null;
+        Statement ms = null;
+        ResultSet rs = null;
+        String q = "SELECT * FROM demo.booking_slots where cID = '" + cID +"'";
+        con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+        ms = con.createStatement();
+        rs = ms.executeQuery(q);
+        
+        while(rs.next()){
+        Booking_OBJ bko = new Booking_OBJ();
+        bko.setcID(get_cName_From_cID(rs.getString("cID")));
+        bko.setsID(rs.getString("sID"));
+        bko.setsName(rs.getString("sName"));
+        bko.setsTime(rs.getString("sTime"));
+        bko.setsDate(rs.getString("sDate"));
+        bko.seteID(rs.getString("eID"));
+        bko.setsSlot(rs.getString("sSlot"));
+        tempList.add(bko);
+        }
+        con.close();
+       return tempList;
+   }
    public Booking_OBJ get_Booking_by_ID(String sID) throws SQLException{
        Booking_OBJ bk = new Booking_OBJ();
        try {
@@ -590,7 +701,7 @@ public class LoginData {
             bk.setsName(rs.getString("sName"));
             bk.setsSlot(rs.getString("sSlot"));
         }
-        
+        con.close();
         return bk;
    }
    
@@ -614,6 +725,7 @@ public class LoginData {
         while(rs.next()){
             temp = rs.getString("sPrice");
         }
+        con.close();
        return temp;
    }
    
@@ -636,6 +748,7 @@ public class LoginData {
             ms.executeUpdate(q1+q2);
             System.out.println("Added to Operation");
             Delete_From_Booking(bk.getsID());
+            con.close();
         } catch (SQLException ex) {
             Logger.getLogger(LoginData.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -671,6 +784,7 @@ public class LoginData {
            op.setsName(rs.getString("sName"));
            opL.add(op);
        }
+       con.close();
        return opL;
    }
    
@@ -707,7 +821,7 @@ public class LoginData {
        ms.executeUpdate(q4+q5);
        
        System.out.println("Delete from operation");
-       
+       con.close();
        
    }
    
@@ -732,7 +846,7 @@ public class LoginData {
            DL.add(nd);
        }
        
-       
+       con.close();
        return DL;
    }
    
@@ -750,6 +864,7 @@ public class LoginData {
        while(rs.next()){
         cID = rs.getString("cID");
        }
+       con.close();
        return cID;
    }
    
@@ -773,6 +888,7 @@ public class LoginData {
            inv.setStatus(rs.getString("status"));
            InL.add(inv);
        }
+       con.close();
        return InL;
    }
    public String get_DrPrice_from_drName(String drName) throws SQLException{
@@ -789,6 +905,7 @@ public class LoginData {
        while(rs.next()){
            drPrice = rs.getString("dPrice");
        }
+       con.close();
        return drPrice;
    }
    public void From_Pre_To_Pay(String oID, String drName, String drQuan,String drNote) throws SQLException{
@@ -834,7 +951,7 @@ public class LoginData {
        
        System.out.println("Delete from operation");
        
-       
+       con.close();
    }
    
    public void set_Op_To_Delay(String OIDS) throws SQLException{
@@ -843,12 +960,13 @@ public class LoginData {
        ResultSet rs = null;
        con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
 
-       for(int i = 0; i < OIDS.length(); i++){
+      
            String q = "UPDATE `demo`.`operations` SET `status` = 'delay' WHERE (`oID` = '";
-           String q2 = Character.toString(OIDS.charAt(i)) + "');";
+           String q2 = OIDS + "');";
            ms = con.createStatement();
            ms.executeUpdate(q+q2);
-       }
+       
+       con.close();
    }
    public void set_Op_To_Process(String OIDS) throws SQLException{
        Connection con = null;
@@ -856,12 +974,13 @@ public class LoginData {
        ResultSet rs = null;
        con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
 
-       for(int i = 0; i < OIDS.length(); i++){
+       
            String q = "UPDATE `demo`.`operations` SET `status` = 'processing' WHERE (`oID` = '";
-           String q2 = Character.toString(OIDS.charAt(i)) + "');";
+           String q2 = OIDS + "');";
            ms = con.createStatement();
            ms.executeUpdate(q+q2);
-       }
+       
+       con.close();
    }
    public void Delete_From_Op(String OIDs) throws SQLException{
        Connection con = null;
@@ -869,12 +988,13 @@ public class LoginData {
        ResultSet rs = null;
        con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
 
-       for(int i = 0; i < OIDs.length(); i++){
+   
            String q6 = "DELETE FROM `demo`.`operations` WHERE (`oID` ='";
-           String q7 = Character.toString(OIDs.charAt(i)) + "');";
+           String q7 = OIDs + "');";
            ms = con.createStatement();
            ms.executeUpdate(q6+q7);
-       }
+       
+       con.close();
    }
    
    public void Pay_All(String iIDS) throws SQLException{
@@ -889,5 +1009,123 @@ public class LoginData {
            ms = con.createStatement();
            ms.executeUpdate(q+q2);
        }
+       con.close();
+   }
+   
+   public List<Prescription> Pres_List_From_cID(String cID) throws SQLException{
+       
+       List<Prescription> PrsL = new ArrayList<>();
+       Connection con = null;
+       Statement ms = null;
+       ResultSet rs = null;
+       String q = "SELECT * FROM demo.prescription where cID = '" +cID+"' ";
+       con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+       ms = con.createStatement();
+       rs = ms.executeQuery(q);
+       
+       while(rs.next()){
+           Prescription prsT = new Prescription();
+           prsT.setpID(rs.getString("pID"));
+           prsT.setcID(rs.getString("cID"));
+           prsT.seteID(rs.getString("eID"));
+           prsT.setDrName(rs.getString("drName"));
+           prsT.setDrQuan(rs.getString("drQuan"));
+           prsT.setDrNote(rs.getString("drNote"));
+           prsT.setDrTotal(rs.getString("drTotal"));
+           prsT.setPrDate(rs.getString("prDate"));
+           PrsL.add(prsT);
+       }
+       con.close();
+       return PrsL;
+       
+   }
+   
+   public Patient Patient_From_cID(String cID) throws SQLException{
+       Patient newP = new Patient();
+       
+        try {
+        Class.forName(driverName);
+        } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+        }
+        
+        Connection con = null;
+        Statement ms = null;
+        ResultSet rs = null;
+        String q = "SELECT * FROM demo.clients where cID = '" + cID +"'";
+        con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+        ms = con.createStatement();
+        rs = ms.executeQuery(q);
+        
+        while(rs.next()){
+            newP.setcName(rs.getString("cName"));
+            newP.setcDOB(rs.getString("cDOB"));
+            newP.setcAddress(rs.getString("cAddress"));
+            newP.setcPO(rs.getString("cPO"));
+            newP.setType(rs.getString("cType"));
+        }
+       con.close();
+       return newP;
+   }
+   
+   public void Add_To_SPE(Patient pa, String Note, String oID){
+       try {
+        Class.forName(driverName);
+        } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+        }
+        Connection con = null;
+        Statement ms = null;
+        ResultSet rs = null;
+        
+        String q1 = "INSERT INTO `demo`.`specialist` (`cName`, `cDOB`, `cAddress`, `cPO`, `cType`, `spNote`) VALUES (' ";
+        String q2 = pa.getcName() +"','"+pa.getcDOB()+"','"+pa.getcAddress()+"','"+pa.getcPO()+"','"+pa.getType()+"','"+Note+"');";
+        try {
+            con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+            ms = con.createStatement();
+            ms.executeUpdate(q1+q2);
+            System.out.println("Added to Specialist");
+            set_Op_To_Delay(oID);
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+   }
+   
+   public void Delete_PA(String cID){
+       Connection con = null;
+       Statement ms = null;
+       ResultSet rs = null;
+       
+       String q1 = "DELETE FROM `demo`.`clients` WHERE (`cID` = ' ";
+       String q2 = cID + "');";
+        try {
+            con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+            ms = con.createStatement();
+            ms.executeUpdate(q1+q2);
+            System.out.println("Delte from Client ID: " + cID);
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+   }
+   
+   public double Turn_Over() throws SQLException{
+       double temp = 0;
+       
+       Connection con = null;
+        Statement ms = null;
+        ResultSet rs = null;
+        String q = "SELECT * FROM demo.invoice where status = 'paid'; ";
+        con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+        ms = con.createStatement();
+        rs = ms.executeQuery(q);
+        
+        while(rs.next()){
+            temp += Double.parseDouble(rs.getString("total"));
+        }
+       con.close();
+       return temp;
    }
 }

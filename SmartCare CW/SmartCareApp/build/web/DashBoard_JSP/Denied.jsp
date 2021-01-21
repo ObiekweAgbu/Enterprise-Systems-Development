@@ -12,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hey fucker you are not admin</h1>
+        <h1>Hey You Can not connect with this account!</h1>
     </body>
 </html>

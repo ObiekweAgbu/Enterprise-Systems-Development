@@ -46,12 +46,12 @@ public class Processing_Request_Serv extends HttpServlet {
             System.out.println("Time to Add");
         }
         else{
-            for(int i = 0; i < sb.length();i++){
-                LD.Delete_From_Request(Character.toString(sb.charAt(i)));
-            }
+            LD.Delete_From_Request(sb.toString());
+            
             System.out.println("Time to Delete");
         }
         System.out.println("IDs ne: " + sb.toString());
+        request.getRequestDispatcher("DashBoard_JSP/admin.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -44,7 +44,8 @@ folder instead of downloading all of them to reduce the load. -->
     <script>
       $.widget.bridge('uibutton', $.ui.button);
     </script>
-    <!-- Bootstrap 3.3.7 -->
+    <!-$.widget.bridge('uibutton', $.ui.button);
+    </- Bootstrap 3.3.7 -->
     <script src="../assets/admin/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- Morris.js charts -->
     <script src="../assets/admin/bower_components/raphael/raphael.min.js"></script>
@@ -98,7 +99,7 @@ folder instead of downloading all of them to reduce the load. -->
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <img src="../assets/admin/images/Admin.png" class="user-image" alt="User Image">
                   <span class="hidden-xs">
-                    <%=request.getParameter("UserID")%>
+                    <%=session.getAttribute("user") %>
                   </span>
                 </a>
                 <ul class="dropdown-menu">
@@ -106,7 +107,7 @@ folder instead of downloading all of them to reduce the load. -->
                   <li class="user-header">
                     <img src="../assets/admin/images/Admin.png" class="img-circle" alt="User Image">
                     <p>
-                      <%=request.getParameter("UserID")%>
+                      <%=session.getAttribute("user") %>
                     </p>
                   </li>
                   <!-- Menu Footer-->
@@ -115,7 +116,7 @@ folder instead of downloading all of them to reduce the load. -->
                       <a href="#" class="btn btn-default btn-flat">Profile</a>
                     </div>
                     <div class="pull-right">
-                      <a href="" class="btn btn-default btn-flat">Sign out</a>
+                      <a href="${pageContext.request.contextPath}/Log_Out.jsp" class="btn btn-default btn-flat">Sign out</a>
                     </div>
                   </li>
                 </ul>
@@ -138,7 +139,7 @@ folder instead of downloading all of them to reduce the load. -->
               <img src="../assets/admin/images/Admin.png" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-              <p><%=request.getParameter("UserID")%></p>
+              <p><%=session.getAttribute("user") %></p>
               <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
           </div>
@@ -166,6 +167,8 @@ folder instead of downloading all of them to reduce the load. -->
                 <li class="active"><a href="../Admin_JSP/View_Patient.jsp"><i class="fa fa-circle-o"></i> View Patient</a></li>
                 <li><a href="../Admin_JSP/Adding_Doctor_Nurse.jsp"><i class="fa fa-circle-o"></i>Adding Doctor and Nurse</a></li>
                 <li><a href="../Admin_JSP/Approve_Request.jsp"><i class="fa fa-circle-o"></i>Approve Request</a></li>
+                <li><a href="../Admin_JSP/Select_Employee.jsp"><i class="fa fa-circle-o"></i>Edit Booking</a></li>
+                <li><a href="../Admin_JSP/Turn_Over.jsp"><i class="fa fa-circle-o"></i>Turn Over Fee</a></li>
               </ul>
             </li>
           </ul>
@@ -183,7 +186,8 @@ folder instead of downloading all of them to reduce the load. -->
       </div>
       <!-- /.content-wrapper -->
       <footer class="main-footer">
-        <strong>Copyright QuanBui-MinhNguyen-Xuer-KhanhLam-NiceMan</strong> 
+        <p>Copyright &copy; 2021 by group 22. All rights reserved.</p>
+         <p> Minh Nguyen &mdash; Quan Bui &mdash; ObiekweAgbu &mdash; Lam Ha &mdash; Xue Er</p>
       </footer>
     </div>
   </body>

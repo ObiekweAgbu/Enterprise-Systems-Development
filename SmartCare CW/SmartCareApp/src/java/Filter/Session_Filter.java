@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Lil Shil
  */
-@WebFilter(urlPatterns = {"/View_Patient_Servlet", "/Adding_Employee_Servlet"})
+@WebFilter(urlPatterns = {"/View_Patient_Servlet", "/Adding_Employee_Servlet","/Delete_From_Booking","/Delete_PA","/Processing_Request_Serv","/View_Patient_Servlet"})
 public class Session_Filter implements Filter {
 
     @Override
@@ -36,7 +36,7 @@ public class Session_Filter implements Filter {
         
         if(rq.getRequestedSessionId() != null && !rq.isRequestedSessionIdValid()){
             System.out.println("Session time out");
-            rps.sendRedirect("Login.jsp");
+            rps.sendRedirect("homepage.jsp");
         }
         else{
             System.out.println("Session is still up");

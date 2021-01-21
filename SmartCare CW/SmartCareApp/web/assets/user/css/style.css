@@ -1,0 +1,403 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 15-Jan-2021, 19:26:06
+    Author     : hkhanhlam99
+*/
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+html {
+    height: 100%;
+    font-family: "lato", "Arial", sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    
+}
+
+/*--------------------------*/
+/* REUSABLE COMPONENTS */
+/*--------------------------*/
+.row {
+	max-width: 1140px;
+	margin: 0 auto;
+}
+
+section {
+	padding-top: 80px;
+}
+
+.box {
+	padding: 1%;
+
+}
+.section-spacing {
+	padding-bottom: 80px;
+}
+
+/*---- HEADINGS ----*/
+h1, h2, h3 {
+	color: #5A5A5A;
+	font-weight: 400;
+	text-transform: uppercase;
+}
+
+h1 {
+	margin-top: 0;
+	color: #fff; 
+	font-size: 2.4rem;
+	font-weight: 300;
+	letter-spacing: 1px;
+	word-spacing: 4px;
+	margin-bottom: 20px;
+}
+
+h2 {
+	letter-spacing: 1px;
+	word-spacing: 2px;
+	text-align: center;
+	font-size: 1.8rem;
+	margin-bottom: 30px;
+}
+
+h2:after {
+	content: "";
+	display: block;
+	height: 2px;
+	width: 200px;
+	background: #E67E22;
+	margin: 0 auto;
+	margin-top: 30px;
+}
+
+h3 {
+	font-size: 1.1rem;
+	margin-bottom: 15px;
+}
+/*---- PARAGRAPH ----*/
+p {
+	color: #5A5A5A;
+	line-height: 145%;
+}
+.p-long {
+	width: 70%;
+	text-align: center;
+	margin: 0 auto;
+	/*70%(w) + 15%(l) + 15%(r) = 100%*/
+	/*margin-left: 15%;
+	margin: 0 15% 30px 15%;*/
+	font-weight: 500;
+}
+
+/*---- LINKS ----*/
+a:link,
+a:visited {
+	color: #E67E22;
+	text-decoration: none;
+	padding-bottom: 1px;
+	border-bottom: 1px solid #E67E22;
+	-webkit-transition: border-bottom 0.3s, color 0.3s;
+	transition: border-bottom 0.3s, color 0.3s;
+}
+
+a:hover,
+a:active {
+	color: #cf6d17;
+	border-bottom: 1px solid transparent;
+}
+
+/*---- BUTTONS ----*/
+.btn:link,
+.btn:visited,
+input[type="submit"] {
+	display: inline-block;
+	color: #fff;
+	text-align: center;
+	padding: 10px 30px;
+	border-radius: 200px;
+	text-decoration: none;
+	outline: none;
+	border: 1px solid #a2d0c1;
+        font-size: 80%;
+}
+
+.btn-1:link,
+.btn-1:visited,
+input[type="submit"] {
+        color: #333;
+	background: #a2d0c1;
+	margin-right: 15px; 
+}
+
+.btn-2:link,
+.btn-2:visited {
+	color: #333;
+}
+
+.btn:hover,
+.btn:active,
+input[type="submit"]:hover,
+input[type="submit"]:active {
+	color: #fff;
+	background: #cf6d17;
+	border: 1px solid #cf6d17;
+	/*all - background-color, border, color*/
+	-webkit-transition: all 0.3s;
+	transition: all 0.3s; 
+}
+
+/*---- ICONS ----*/
+.icon-small {
+	display: inline-block;
+	width: 30px;
+	text-align: center;
+	color: #E67E22;
+	font-size: 1.2rem;
+	/*secret to align text and icons*/
+	vertical-align: middle;
+	line-height: 120%;
+	margin-top: -5px;
+	margin-right: 10px;
+}
+/*--------------------------*/
+/* HEADER */
+/*--------------------------*/
+header {
+	background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../img/header_bg.png");
+	background-size: cover; 
+	background-attachment: fixed;
+	height: 100vh;
+}
+
+.big-text-box {
+	position: absolute;
+	width: 1140px;
+	top: 50%;
+	left: 50%;
+	/*https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/translate*/
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+/*---- LOGO ----*/
+.logo {
+	height: 80px;
+	width: auto;
+	float: left;
+	margin-top: 20px;
+}
+
+/*---- NAVIGATION ----*/
+.main-nav {
+	float: right;
+	list-style: none;
+	margin-top: 55px;
+}
+
+.main-nav li {
+	display: inline-block;
+	margin-left: 40px;
+}
+
+.main-nav li a:link,
+.main-nav li a:visited {
+	text-decoration: none;
+	text-transform: uppercase;
+	padding: 8px 0;
+	color: #fff;
+	font-weight: 500;
+	font-size: 0.9rem;
+	border-bottom: 2px solid transparent;
+}
+
+.main-nav li a:hover,
+.main-nav li a:active {
+	border-bottom: 2px solid #E67E22;
+	-webkit-transition: border-bottom 0.3s;
+	transition: border-bottom 0.3s;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 2px 2px #dddddd;
+    z-index: 1;
+    transition: all 500ms;
+}
+.sticky .mobile-nav-icon { margin-top: 15px; }
+
+.sticky .main-nav { margin: 20px 0; }
+
+.sticky .main-nav li a:link,
+.sticky .main-nav li a:visited {
+	padding: 15px 0;
+	color: #555;
+}
+
+.sticky .logo {
+    height: 50px;
+}
+
+/*--------------------------*/
+/* INFO SECTION */
+/*--------------------------*/
+.section-info {
+	background: #eff7e1;
+}
+
+/*--------------------------*/
+/* TEAM SECTION */
+/*--------------------------*/
+.section-team .row {
+	max-width: 100%;
+	margin: 0 30px;
+}
+
+.box img {
+	width: 100%;
+	height: 250px;
+	margin-bottom: 15px;
+}
+
+.staff-feature {
+	margin-bottom: 5px;
+}
+
+/*--------------------------*/
+/* LOGIN/REGISTER SECTION */
+/*--------------------------*/
+.section-login,
+.section-register-staff,
+.section-register,
+.section-select-employee {
+    background: #eff7e1;
+}
+.section-login .login-form,
+.section-register .register-form,
+.section-register-staff .register-form,
+.section-select-employee .book-form {
+	width: 40%;
+	margin: 0 auto;
+}
+
+.section-book-doc .book-form,
+.section-book-nurse .book-form {
+	width: 100%;
+	margin: 20px auto;
+}
+
+.login-form div label,
+.register-form div label {
+	margin-left: 30%;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"], 
+select {
+	width: 100%;
+        height: 50px;
+	padding: 7px;
+	border-radius: 3px;
+	border: 1px solid gray;
+}
+
+input[placeholder],
+select {
+        background-color: #fff;
+        font-size: 80%;
+}
+
+*:focus {outline: none;}
+
+.label-form {
+	margin-left: 30%;
+}
+
+
+/*--------------------------*/
+/* FOOTER */
+/*--------------------------*/
+
+footer {
+	background: #333;
+	padding-bottom: 30px;
+}
+
+footer p {
+	color: #888;
+	text-align: center;
+	font-size: 90%;
+	position: relative;
+	top: 20px;
+	left: 0;
+}
+.navigation-link {
+	list-style: none;
+	float: left;
+}
+
+.navigation-icon {
+	list-style: none;
+	float: right;
+}
+
+.navigation-link li,
+.navigation-icon li{
+	display: inline-block;
+	margin-right: 30px;
+}
+
+.navigation-link li:last-child,
+.navigation-icon li:last-child {
+	margin-right: 0;
+}
+
+.navigation-link li a:link,
+.navigation-link li a:visited,
+.navigation-icon li a:link,
+.navigation-icon li a:visited {
+	text-decoration: none;
+	border: none;
+	font-size: 120%;
+	color: #888;
+	-webkit-transition: color 0.3s;
+	transition: color 0.3s;
+}
+
+.navigation-link li a:hover,
+.navigation-link li a:active {
+	color: #fff;
+}
+
+.navigation-icon-facebook:hover,
+.navigation-icon-twitter:hover,
+.navigation-icon-google:hover,
+.navigation-icon-instagram:hover {
+	-webkit-transition: color 0.3s;
+	transition: color 0.3s;
+}
+
+.navigation-icon-facebook:hover {
+	color: #3b5998;
+}
+
+.navigation-icon-twitter:hover {
+	color: #1da1f2;
+}
+
+.navigation-icon-google:hover {
+	color: #ea4335;
+}
+
+.navigation-icon-instagram:hover {
+	color: #c32aa3;
+}

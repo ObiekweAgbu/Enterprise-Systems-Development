@@ -15,6 +15,10 @@
                 alert("You havent selected any row");
                 return false;
             }
+            if(document.querySelectorAll('input[type = "checkbox"]:checked').length >1 ){
+                alert("You can only process one at a time");
+                return false;
+            }
         }
         
     </script>
@@ -111,7 +115,7 @@ folder instead of downloading all of them to reduce the load. -->
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <img src="../assets/admin/images/Admin.png" class="user-image" alt="User Image">
                   <span class="hidden-xs">
-                    Admin
+                    <%=session.getAttribute("user") %>
                   </span>
                 </a>
                 <ul class="dropdown-menu">
@@ -119,7 +123,7 @@ folder instead of downloading all of them to reduce the load. -->
                   <li class="user-header">
                     <img src="../assets/admin/images/Admin.png" class="img-circle" alt="User Image">
                     <p>
-                      Admin
+                      <%=session.getAttribute("user") %>
                     </p>
                   </li>
                   <!-- Menu Footer-->
@@ -128,7 +132,7 @@ folder instead of downloading all of them to reduce the load. -->
                       <a href="#" class="btn btn-default btn-flat">Profile</a>
                     </div>
                     <div class="pull-right">
-                      <a href="" class="btn btn-default btn-flat">Sign out</a>
+                      <a href="${pageContext.request.contextPath}/Log_Out.jsp" class="btn btn-default btn-flat">Sign out</a>
                     </div>
                   </li>
                 </ul>
@@ -179,6 +183,8 @@ folder instead of downloading all of them to reduce the load. -->
                 <li class="active"><a href="../Admin_JSP/View_Patient.jsp"><i class="fa fa-circle-o"></i> View Patient</a></li>
                 <li><a href="../Admin_JSP/Adding_Doctor_Nurse.jsp"><i class="fa fa-circle-o"></i>Adding Doctor and Nurse</a></li>
                 <li><a href="../Admin_JSP/Approve_Request.jsp"><i class="fa fa-circle-o"></i>Approve Request</a></li>
+                <li><a href="../Admin_JSP/Select_Employee.jsp"><i class="fa fa-circle-o"></i>Edit Booking</a></li>
+                <li><a href="../Admin_JSP/Turn_Over.jsp"><i class="fa fa-circle-o"></i>Turn Over Fee</a></li>
               </ul>
             </li>
           </ul>
