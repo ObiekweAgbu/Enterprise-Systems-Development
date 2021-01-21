@@ -188,25 +188,22 @@ public class LoginData {
         try{
             String q = "SELECT * FROM demo.adding_request where rID=";
             con = DriverManager.getConnection(connectionUrl+dbName, userId, password);
-            List<Request> list = new ArrayList<>();
-            for(int i = 0 ; i < IDs.length();i++){
-                int id = Character.getNumericValue(IDs.charAt(i));
-                ms = con.createStatement();
-                rs = ms.executeQuery(q + Integer.toString(id));
-                
+            List<Request> list = new ArrayList<>();   
+            ms = con.createStatement();
+            rs = ms.executeQuery(q + IDs);
                 while(rs.next()){
-                Request nq = new Request();
-                nq.setID(rs.getString("rID"));
-                nq.setName(rs.getString("rName"));
-                nq.setDOB(rs.getString("rDOB"));
-                nq.setAddress(rs.getString("rAddress"));
-                nq.setPO(rs.getString("rPO"));
-                nq.setUname(rs.getString("rUname"));
-                nq.setPW(rs.getString("rPW"));
-                nq.setJob(rs.getString("rJob"));
-                list.add(nq);
+                    Request nq = new Request();
+                    nq.setID(rs.getString("rID"));
+                    nq.setName(rs.getString("rName"));
+                    nq.setDOB(rs.getString("rDOB"));
+                    nq.setAddress(rs.getString("rAddress"));
+                    nq.setPO(rs.getString("rPO"));
+                    nq.setUname(rs.getString("rUname"));
+                    nq.setPW(rs.getString("rPW"));
+                    nq.setJob(rs.getString("rJob"));
+                    list.add(nq);
                 }
-            }
+          
             for(Request i : list){
                 Add_Doc_or_Nurse(i.getName(), i.getPO(), i.getDOB(), i.getAddress(), i.getUname(), i.getPW(), i.getJob());
                 Delete_From_Request(i.getID());
